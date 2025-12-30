@@ -1,7 +1,43 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 
-Route::get('/', function () {
-    return view('welcome');
+// Authentication Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+});
+
+// Protected Routes
+Route::middleware('auth')->group(function () {
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    
+    // Main Pages (Existing - TIDAK DIKURANGI)
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/about', [HomeController::class, 'about'])->name('about');
+    Route::get('/biodata', [HomeController::class, 'biodata'])->name('biodata');
+    Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
+    Route::get('/pengumuman', [HomeController::class, 'announcement'])->name('pengumuman');
+    Route::get('/program', [HomeController::class, 'program'])->name('program');
+    Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+    Route::get('/berita', [HomeController::class, 'news'])->name('berita');
+    Route::get('/akademik', [HomeController::class, 'academic'])->name('akademik');
+    
+    // Profile
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    
+    // NAVBAR MENU ROUTES (TAMBAHAN BARU SESUAI GAMBAR)
+    Route::get('/schedule', [HomeController::class, 'schedule'])->name('schedule');
+    Route::get('/reports', [HomeController::class, 'reports'])->name('reports');
+    Route::get('/documents', [HomeController::class, 'documents'])->name('documents');
+    Route::get('/messages', [HomeController::class, 'messages'])->name('messages');
+    
 });
