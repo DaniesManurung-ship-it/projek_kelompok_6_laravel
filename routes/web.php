@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\GalleryController;
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
@@ -54,4 +55,10 @@ Route::middleware('auth')->group(function () {
 
     // Route untuk Hapus
     Route::delete('/teachers/{id}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
+
+    // Gallery Management
+    Route::post('/gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+    Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+    Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 });

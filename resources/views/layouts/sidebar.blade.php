@@ -49,9 +49,9 @@
             </li>
 
             <li class="nav-item mb-2">
-                <a class="nav-link text-white {{ request()->routeIs('gallery') ? 'active bg-primary text-dark rounded' : '' }}"
-                   href="{{ route('gallery') }}">
-                    <i class="fas fa-images me-3"></i>Gallery
+                <a class="nav-link text-white {{ request()->routeIs('gallery') ? 'active bg-primary text-dark rounded' : '' }}" 
+                    href="{{ route('gallery') }}">
+            <i class="fas fa-images me-3"></i>Gallery
                 </a>
             </li>
 
