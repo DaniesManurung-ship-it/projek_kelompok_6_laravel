@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\GalleryController;
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
@@ -40,4 +42,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/documents', [HomeController::class, 'documents'])->name('documents');
     Route::get('/messages', [HomeController::class, 'messages'])->name('messages');
     
+    // Teacher Management
+    Route::post('/biodata/store', [TeacherController::class, 'store'])->name('biodata.store');
+    Route::post('/teachers', [TeacherController::class, 'store'])->name('teachers.store');
+    Route::get('/teachers/list', [TeacherController::class, 'index'])->name('teachers.index');
+    // Route untuk Lihat Detail
+    Route::get('/teachers/{id}', [TeacherController::class, 'show'])->name('teachers.show');
+
+    // Route untuk Edit
+    Route::get('/teachers/{id}/edit', [TeacherController::class, 'edit'])->name('teachers.edit');
+    Route::put('/teachers/{id}', [TeacherController::class, 'update'])->name('teachers.update');
+
+    // Route untuk Hapus
+    Route::delete('/teachers/{id}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
+
+    // Gallery Management
+    Route::post('/gallery/store', [GalleryController::class, 'store'])->name('gallery.store');
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+    Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+    Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 });
