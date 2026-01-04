@@ -49,9 +49,9 @@
             </li>
 
             <li class="nav-item mb-2">
-                <a class="nav-link text-white {{ request()->routeIs('gallery') ? 'active bg-primary text-dark rounded' : '' }}"
-                   href="{{ route('gallery') }}">
-                    <i class="fas fa-images me-3"></i>Gallery
+                <a class="nav-link text-white {{ request()->routeIs('gallery') ? 'active bg-primary text-dark rounded' : '' }}" 
+                    href="{{ route('gallery') }}">
+            <i class="fas fa-images me-3"></i>Gallery
                 </a>
             </li>
 
@@ -158,7 +158,12 @@
             <h6 class="text-uppercase text-light opacity-50 mb-3">Admin Menu</h6>
             <ul class="nav flex-column">
                 <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fas fa-users me-3"></i>Students</a></li>
-                <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fas fa-chalkboard-teacher me-3"></i>Teachers</a></li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-white {{ request()->routeIs('teachers.index') ? 'active bg-primary text-dark rounded' : '' }}" 
+                        href="{{ route('teachers.index') }}">
+                    <i class="fas fa-chalkboard-teacher me-3"></i>Teachers
+                    </a>
+                </li>
                 <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fas fa-book-open me-3"></i>Library</a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fas fa-calendar-alt me-3"></i>Routine</a></li>
                 <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fas fa-file-alt me-3"></i>Exam</a></li>
