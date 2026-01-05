@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\ContactController;
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
@@ -68,4 +69,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/documents/upload', [DocumentController::class, 'store'])->name('documents.store');
     Route::delete('/documents/{id}', [DocumentController::class, 'destroy'])->name('documents.destroy');
     Route::put('/documents/{id}', [DocumentController::class, 'update'])->name('documents.update');
+
+    // Contact
+    Route::post('/contact-send', [ContactController::class, 'store'])->name('contact.send');
+    Route::get('/contact-list', [ContactController::class, 'index'])->name('contact.list');
 });
