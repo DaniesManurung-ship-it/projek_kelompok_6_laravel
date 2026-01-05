@@ -4,7 +4,14 @@
 
 @section('content')
 <div class="container-fluid px-3 px-md-4">
-    <!-- Header Section -->
+    <!-- Flash Message -->
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <div class="row mb-4">
         <div class="col">
             <div class="d-flex justify-content-between align-items-center">
@@ -12,7 +19,7 @@
                     <h1 class="fw-bold text-dark">School Documents</h1>
                     <p class="text-muted">Manage and organize school documents and files</p>
                 </div>
-                <div class="bg-gradient-3 text-white p-3 rounded-circle">
+                <div class="bg-primary text-white p-3 rounded-circle shadow-sm">
                     <i class="fas fa-folder fa-2x"></i>
                 </div>
             </div>
@@ -22,228 +29,190 @@
     <!-- Stats Cards -->
     <div class="row g-3 g-md-4 mb-4">
         <div class="col-md-3 col-6">
-            <div class="stat-card bg-gradient-1 card-hover h-100">
+            <div class="card bg-primary text-white p-3 border-0 shadow-sm h-100">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h3 class="fw-bold">1.2K</h3>
-                        <p class="mb-0">Total Files</p>
+                        <h3 class="fw-bold mb-0">{{ $documents->count() }}</h3>
+                        <p class="mb-0 small">Total Files</p>
                     </div>
                     <i class="fas fa-file fa-2x opacity-50"></i>
                 </div>
-                <small class="opacity-75 d-block mt-2">↑ 45 this month</small>
             </div>
         </div>
         <div class="col-md-3 col-6">
-            <div class="stat-card bg-gradient-2 card-hover h-100">
+            <div class="card bg-success text-white p-3 border-0 shadow-sm h-100">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h3 class="fw-bold">485 MB</h3>
-                        <p class="mb-0">Storage Used</p>
+                        <h3 class="fw-bold mb-0">{{ $totalSize }}</h3>
+                        <p class="mb-0 small">Storage Used</p>
                     </div>
                     <i class="fas fa-database fa-2x opacity-50"></i>
                 </div>
-                <small class="opacity-75 d-block mt-2">65% of total</small>
             </div>
         </div>
         <div class="col-md-3 col-6">
-            <div class="stat-card bg-gradient-3 card-hover h-100">
+            <div class="card bg-info text-white p-3 border-0 shadow-sm h-100">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h3 class="fw-bold">12</h3>
-                        <p class="mb-0">Shared Folders</p>
+                        <h3 class="fw-bold mb-0">3</h3>
+                        <p class="mb-0 small">Categories</p>
                     </div>
-                    <i class="fas fa-share-alt fa-2x opacity-50"></i>
+                    <i class="fas fa-tags fa-2x opacity-50"></i>
                 </div>
-                <small class="opacity-75 d-block mt-2">3 new this week</small>
             </div>
         </div>
         <div class="col-md-3 col-6">
-            <div class="stat-card bg-gradient-4 card-hover h-100">
+            <div class="card bg-warning text-white p-3 border-0 shadow-sm h-100">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h3 class="fw-bold">28</h3>
-                        <p class="mb-0">Recent Uploads</p>
+                        <h3 class="fw-bold mb-0">{{ $documents->where('created_at', '>=', now()->today())->count() }}</h3>
+                        <p class="mb-0 small">Today Uploads</p>
                     </div>
                     <i class="fas fa-upload fa-2x opacity-50"></i>
                 </div>
-                <small class="opacity-75 d-block mt-2">Today</small>
             </div>
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="row">
         <!-- Left Column -->
         <div class="col-lg-8">
-            <!-- Document Categories -->
+            <!-- Categories Dinamis -->
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white border-0 py-3">
-                    <h5 class="fw-bold mb-0">
-                        <i class="fas fa-folder-open me-2 text-primary"></i>Document Categories
-                    </h5>
+                    <h5 class="fw-bold mb-0"><i class="fas fa-folder-open me-2 text-primary"></i>Document Categories</h5>
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
-                        <!-- Category 1 -->
-                        <div class="col-md-4">
-                            <div class="card card-hover border-0 bg-light">
-                                <div class="card-body text-center">
-                                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                         style="width: 60px; height: 60px;">
-                                        <i class="fas fa-graduation-cap fa-2x"></i>
-                                    </div>
-                                    <h6 class="fw-bold mb-1">Academic</h6>
-                                    <p class="text-muted small mb-2">Syllabus, Notes, Papers</p>
-                                    <span class="badge bg-primary">324 files</span>
-                                </div>
+                        <div class="col-md-4 text-center">
+                            <div class="p-3 border rounded bg-light shadow-sm">
+                                <i class="fas fa-graduation-cap fa-2x text-primary mb-2"></i>
+                                <h6 class="fw-bold mb-1">Academic</h6>
+                                <span class="badge bg-primary rounded-pill">{{ $countAcademic }} files</span>
                             </div>
                         </div>
-                        
-                        <!-- Category 2 -->
-                        <div class="col-md-4">
-                            <div class="card card-hover border-0 bg-light">
-                                <div class="card-body text-center">
-                                    <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                         style="width: 60px; height: 60px;">
-                                        <i class="fas fa-users fa-2x"></i>
-                                    </div>
-                                    <h6 class="fw-bold mb-1">Administrative</h6>
-                                    <p class="text-muted small mb-2">Forms, Policies, Records</p>
-                                    <span class="badge bg-success">187 files</span>
-                                </div>
+                        <div class="col-md-4 text-center">
+                            <div class="p-3 border rounded bg-light shadow-sm">
+                                <i class="fas fa-users fa-2x text-success mb-2"></i>
+                                <h6 class="fw-bold mb-1">Administrative</h6>
+                                <span class="badge bg-success rounded-pill">{{ $countAdmin }} files</span>
                             </div>
                         </div>
-                        
-                        <!-- Category 3 -->
-                        <div class="col-md-4">
-                            <div class="card card-hover border-0 bg-light">
-                                <div class="card-body text-center">
-                                    <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                         style="width: 60px; height: 60px;">
-                                        <i class="fas fa-money-bill-wave fa-2x"></i>
-                                    </div>
-                                    <h6 class="fw-bold mb-1">Financial</h6>
-                                    <p class="text-muted small mb-2">Budgets, Fees, Reports</p>
-                                    <span class="badge bg-warning">92 files</span>
-                                </div>
+                        <div class="col-md-4 text-center">
+                            <div class="p-3 border rounded bg-light shadow-sm">
+                                <i class="fas fa-money-bill-wave fa-2x text-warning mb-2"></i>
+                                <h6 class="fw-bold mb-1">Financial</h6>
+                                <span class="badge bg-warning rounded-pill text-dark">{{ $countFinance }} files</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Recent Documents -->
+            <!-- Table Dinamis -->
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white border-0 py-3">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="fw-bold mb-0">
-                            <i class="fas fa-history me-2 text-primary"></i>Recent Documents
-                        </h5>
-                        <button class="btn btn-sm btn-primary">
-                            <i class="fas fa-upload me-1"></i>Upload New
-                        </button>
-                    </div>
+                    <h5 class="fw-bold mb-0"><i class="fas fa-history me-2 text-primary"></i>Recent Documents</h5>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead>
-                                <tr class="border-bottom">
-                                    <th>Document Name</th>
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="ps-3">Document Name</th>
                                     <th>Type</th>
                                     <th>Size</th>
-                                    <th>Last Modified</th>
-                                    <th>Actions</th>
+                                    <th>Date</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse($documents as $doc)
                                 <tr>
-                                    <td>
+                                    <td class="ps-3">
                                         <div class="d-flex align-items-center">
-                                            <i class="fas fa-file-pdf text-danger me-2"></i>
-                                            <span class="fw-bold">Term_3_Report.pdf</span>
+                                            @php
+                                                $icon = 'fa-file';
+                                                $color = 'text-secondary';
+                                                $ext = strtolower($doc->type);
+                                                if(in_array($ext, ['pdf'])) { $icon = 'fa-file-pdf'; $color = 'text-danger'; }
+                                                elseif(in_array($ext, ['xlsx', 'xls'])) { $icon = 'fa-file-excel'; $color = 'text-success'; }
+                                                elseif(in_array($ext, ['doc', 'docx'])) { $icon = 'fa-file-word'; $color = 'text-primary'; }
+                                                elseif(in_array($ext, ['png', 'jpg', 'jpeg'])) { $icon = 'fa-file-image'; $color = 'text-info'; }
+                                            @endphp
+                                            <i class="fas {{ $icon }} {{ $color }} fa-lg me-2"></i>
+                                            <span class="fw-bold text-dark">{{ Str::limit($doc->name, 30) }}</span>
                                         </div>
                                     </td>
-                                    <td><span class="badge bg-danger">PDF</span></td>
-                                    <td>2.4 MB</td>
-                                    <td>2 hours ago</td>
+                                    <td><span class="badge bg-light text-dark border">{{ strtoupper($doc->type) }}</span></td>
+                                    <td>{{ $doc->size }}</td> <!-- Perbaikan MB MB ada di sini -->
+                                    <td><small class="text-muted">{{ $doc->created_at->diffForHumans() }}</small></td>
                                     <td>
-                                        <div class="btn-group btn-group-sm">
-                                            <button class="btn btn-outline-primary">
+                                        <div class="d-flex justify-content-center gap-1">
+                                            <!-- Download -->
+                                            <a href="{{ asset('storage/' . $doc->file_path) }}" class="btn btn-sm btn-outline-primary" title="Download" download>
                                                 <i class="fas fa-download"></i>
+                                            </a>
+                                            
+                                            <!-- Edit Button (Pemicu Modal) -->
+                                            <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $doc->id }}" title="Edit">
+                                                <i class="fas fa-edit"></i>
                                             </button>
-                                            <button class="btn btn-outline-info">
-                                                <i class="fas fa-share"></i>
-                                            </button>
-                                            <button class="btn btn-outline-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+
+                                            <!-- Delete -->
+                                            <form action="{{ route('documents.destroy', $doc->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus dokumen ini?')">
+                                                @csrf @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Hapus">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                        <!-- Modal Edit (Berada di dalam loop agar setiap file punya modal sendiri) -->
+                                        <div class="modal fade" id="editModal{{ $doc->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content border-0 shadow">
+                                                    <div class="modal-header bg-warning">
+                                                        <h5 class="modal-title fw-bold" id="editModalLabel"><i class="fas fa-edit me-2"></i>Edit Document Info</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="{{ route('documents.update', $doc->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="modal-body py-4">
+                                                            <div class="mb-3">
+                                                                <label class="form-label fw-bold">Document Name</label>
+                                                                <input type="text" name="name" class="form-control" value="{{ $doc->name }}" required>
+                                                                <small class="text-muted italic">Ubah nama tampilan file di sistem</small>
+                                                            </div>
+                                                            <div class="mb-0">
+                                                                <label class="form-label fw-bold">Category</label>
+                                                                <select name="category" class="form-select" required>
+                                                                    <option value="Academic" {{ $doc->category == 'Academic' ? 'selected' : '' }}>Academic</option>
+                                                                    <option value="Administrative" {{ $doc->category == 'Administrative' ? 'selected' : '' }}>Administrative</option>
+                                                                    <option value="Financial" {{ $doc->category == 'Financial' ? 'selected' : '' }}>Financial</option>
+                                                                    <option value="Other" {{ $doc->category == 'Other' ? 'selected' : '' }}>Other</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer bg-light">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-warning fw-bold">Update Changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
+                                @empty
                                 <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-file-excel text-success me-2"></i>
-                                            <span class="fw-bold">Student_List.xlsx</span>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-success">Excel</span></td>
-                                    <td>1.8 MB</td>
-                                    <td>Yesterday</td>
-                                    <td>
-                                        <div class="btn-group btn-group-sm">
-                                            <button class="btn btn-outline-primary">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                            <button class="btn btn-outline-info">
-                                                <i class="fas fa-share"></i>
-                                            </button>
-                                        </div>
+                                    <td colspan="5" class="text-center py-5">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png" width="80" class="opacity-25 mb-3">
+                                        <p class="text-muted">No documents found. Start by uploading one!</p>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-file-word text-primary me-2"></i>
-                                            <span class="fw-bold">Academic_Calendar.docx</span>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-primary">Word</span></td>
-                                    <td>3.1 MB</td>
-                                    <td>2 days ago</td>
-                                    <td>
-                                        <div class="btn-group btn-group-sm">
-                                            <button class="btn btn-outline-primary">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                            <button class="btn btn-outline-info">
-                                                <i class="fas fa-share"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-file-image text-info me-2"></i>
-                                            <span class="fw-bold">School_Map.png</span>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-info">Image</span></td>
-                                    <td>4.2 MB</td>
-                                    <td>1 week ago</td>
-                                    <td>
-                                        <div class="btn-group btn-group-sm">
-                                            <button class="btn btn-outline-primary">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                            <button class="btn btn-outline-info">
-                                                <i class="fas fa-share"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -251,76 +220,52 @@
             </div>
         </div>
 
-        <!-- Right Column -->
+        <!-- Right Column (Form Upload) -->
         <div class="col-lg-4">
-            <!-- Storage Usage -->
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white border-0 py-3">
-                    <h5 class="fw-bold mb-0">
-                        <i class="fas fa-hdd me-2 text-warning"></i>Storage Usage
-                    </h5>
+                    <h5 class="fw-bold mb-0"><i class="fas fa-upload me-2 text-primary"></i>Quick Upload</h5>
                 </div>
                 <div class="card-body">
-                    <div class="mb-4">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span class="fw-bold">Total Storage</span>
-                            <span class="fw-bold">750 MB / 1 GB</span>
+                    <form action="{{ route('documents.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Pilih File</label>
+                            <input type="file" name="file" class="form-control @error('file') is-invalid @enderror" required>
+                            @error('file') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
-                        <div class="progress" style="height: 10px;">
-                            <div class="progress-bar bg-success" style="width: 65%"></div>
-                            <div class="progress-bar bg-warning" style="width: 10%"></div>
-                            <div class="progress-bar bg-danger" style="width: 5%"></div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Kategori</label>
+                            <select name="category" class="form-select" required>
+                                <option value="Academic">Academic</option>
+                                <option value="Administrative">Administrative</option>
+                                <option value="Financial">Financial</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <small class="text-success">Available: 250 MB</small>
-                            <small class="text-danger">Limit: 1 GB</small>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <h6 class="fw-bold mb-2">Usage by Type</h6>
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>PDF Documents</span>
-                            <span class="fw-bold">320 MB</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>Images</span>
-                            <span class="fw-bold">180 MB</span>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span>Other Files</span>
-                            <span class="fw-bold">250 MB</span>
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-bold shadow-sm">
+                            <i class="fas fa-cloud-upload-alt me-2"></i>Upload Sekarang
+                        </button>
+                    </form>
                 </div>
             </div>
-            
-            <!-- Quick Upload -->
-            <div class="card border-0 shadow-sm">
+
+            <!-- Storage Info -->
+            <div class="card border-0 shadow-sm overflow-hidden">
                 <div class="card-body">
-                    <h6 class="fw-bold mb-3">Quick Upload</h6>
-                    <div class="mb-3">
-                        <label class="form-label">Select Files</label>
-                        <div class="border rounded p-4 text-center bg-light">
-                            <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
-                            <p class="text-muted small mb-2">Drag & drop files here or</p>
-                            <button class="btn btn-sm btn-outline-primary">
-                                Browse Files
-                            </button>
-                        </div>
+                    <h6 class="fw-bold mb-3">Storage Usage</h6>
+                    @php 
+                        // Ambil angka saja dari string "0.06 MB" untuk kalkulasi
+                        $sizeValue = (float)$totalSize;
+                        $percent = ($sizeValue / 1024) * 100; 
+                    @endphp
+                    <div class="progress mb-2" style="height: 12px; border-radius: 10px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: {{ max($percent, 2) }}%"></div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Category</label>
-                        <select class="form-select">
-                            <option>Academic</option>
-                            <option>Administrative</option>
-                            <option>Financial</option>
-                            <option>Other</option>
-                        </select>
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted fw-bold">{{ $totalSize }} used</small>
+                        <small class="text-muted">Limit 1024 MB</small>
                     </div>
-                    <button class="btn btn-gradient w-100">
-                        <i class="fas fa-upload me-2"></i>Upload Files
-                    </button>
                 </div>
             </div>
         </div>

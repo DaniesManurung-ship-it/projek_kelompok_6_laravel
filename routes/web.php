@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\DocumentController;
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
@@ -61,4 +62,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
     Route::put('/gallery/{id}', [GalleryController::class, 'update'])->name('gallery.update');
     Route::delete('/gallery/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+
+    // Document Management
+    Route::get('/documents', [DocumentController::class, 'index'])->name('documents');
+    Route::post('/documents/upload', [DocumentController::class, 'store'])->name('documents.store');
+    Route::delete('/documents/{id}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+    Route::put('/documents/{id}', [DocumentController::class, 'update'])->name('documents.update');
 });
