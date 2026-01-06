@@ -9,6 +9,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\StudentController;
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
@@ -73,4 +74,8 @@ Route::middleware('auth')->group(function () {
     // Contact
     Route::post('/contact-send', [ContactController::class, 'store'])->name('contact.send');
     Route::get('/contact-list', [ContactController::class, 'index'])->name('contact.list');
+
+    // Students
+    Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+    Route::resource('students', StudentController::class);
 });

@@ -157,7 +157,12 @@
         <div class="pt-3 border-top">
             <h6 class="text-uppercase text-light opacity-50 mb-3">Admin Menu</h6>
             <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fas fa-users me-3"></i>Students</a></li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link text-white {{ request()->is('students*') ? 'active-class-anda' : '' }}" 
+                        href="{{ route('students.index') }}">
+                    <i class="fas fa-users me-3"></i>Students
+                    </a>
+                </li>
                 <li class="nav-item mb-2">
                     <a class="nav-link text-white {{ request()->routeIs('teachers.index') ? 'active bg-primary text-dark rounded' : '' }}" 
                         href="{{ route('teachers.index') }}">
