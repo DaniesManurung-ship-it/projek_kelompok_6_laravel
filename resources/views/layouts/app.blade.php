@@ -232,6 +232,22 @@
             border-radius: 4px;
         }
     </style>
+
+    <style>
+    .nav-link {
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-bottom: 5px;
+        transition: 0.3s;
+    }
+    .nav-link:hover {
+        background: rgba(255,255,255,0.1);
+    }
+    .nav-link.active {
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    </style>
     
     @yield('styles')
 </head>

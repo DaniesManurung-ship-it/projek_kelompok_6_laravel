@@ -10,6 +10,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\LibraryController;
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
@@ -78,4 +79,21 @@ Route::middleware('auth')->group(function () {
     // Students
     Route::get('/students', [StudentController::class, 'index'])->name('students.index');
     Route::resource('students', StudentController::class);
+
+    // Route untuk Admin Menu
+    Route::get('/library', function () {
+    return view('library'); // Ini akan mencari file library.blade.php
+    })->name('library.index');
+    Route::get('/library', [LibraryController::class, 'index'])->name('library.index');
+    Route::post('/library', [LibraryController::class, 'store'])->name('library.store');
+    Route::delete('/library/{id}', [LibraryController::class, 'destroy'])->name('library.destroy');
+    Route::put('/library/{id}', [LibraryController::class, 'update'])->name('library.update');
+
+    Route::get('/routine', function () {
+    return view('routine'); // Ini akan mencari file routine.blade.php
+    })->name('routine.index');
+
+    Route::get('/exam', function () {
+    return view('exam'); // Ini akan mencari file exam.blade.php
+    })->name('exam.index');
 });

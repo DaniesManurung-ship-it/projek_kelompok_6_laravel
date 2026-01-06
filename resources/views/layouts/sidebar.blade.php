@@ -169,9 +169,29 @@
                     <i class="fas fa-chalkboard-teacher me-3"></i>Teachers
                     </a>
                 </li>
-                <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fas fa-book-open me-3"></i>Library</a></li>
-                <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fas fa-calendar-alt me-3"></i>Routine</a></li>
-                <li class="nav-item mb-2"><a class="nav-link text-white" href="#"><i class="fas fa-file-alt me-3"></i>Exam</a></li>
+               <!-- Menu Library -->
+<li class="nav-item">
+    <a class="nav-link text-white {{ Request::is('library*') ? 'active-menu' : '' }}" href="{{ route('library.index') }}">
+    <i class="fas fa-book me-2"></i>
+    <span>Library</span>
+    </a>
+</li>
+
+<!-- Menu Routine -->
+<li class="nav-item">
+    <a class="nav-link text-white {{ Request::is('routine') ? 'active bg-white text-primary' : '' }}" href="{{ route('routine.index') }}">
+        <i class="fas fa-calendar-alt me-2"></i>
+        <span>Routine</span>
+    </a>
+</li>
+
+<!-- Menu Exam -->
+<li class="nav-item">
+    <a class="nav-link text-white {{ Request::is('exam') ? 'active bg-white text-primary' : '' }}" href="{{ route('exam.index') }}">
+        <i class="fas fa-file-alt me-2"></i>
+        <span>Exam</span>
+    </a>
+</li>
             </ul>
         </div>
 
