@@ -177,21 +177,6 @@
     </a>
 </li>
 
-<!-- Menu Routine -->
-<li class="nav-item">
-    <a class="nav-link text-white {{ Request::is('routine') ? 'active bg-white text-primary' : '' }}" href="{{ route('routine.index') }}">
-        <i class="fas fa-calendar-alt me-2"></i>
-        <span>Routine</span>
-    </a>
-</li>
-
-<!-- Menu Exam -->
-<li class="nav-item">
-    <a class="nav-link text-white {{ Request::is('exam') ? 'active bg-white text-primary' : '' }}" href="{{ route('exam.index') }}">
-        <i class="fas fa-file-alt me-2"></i>
-        <span>Exam</span>
-    </a>
-</li>
             </ul>
         </div>
 
