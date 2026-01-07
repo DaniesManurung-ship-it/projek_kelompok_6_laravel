@@ -21,7 +21,7 @@
                 <ul class="list-unstyled">
                     <li class="mb-2"><a href="{{ route('home') }}" class="text-decoration-none text-muted">Home</a></li>
                     <li class="mb-2"><a href="{{ route('about') }}" class="text-decoration-none text-muted">About</a></li>
-                    <li class="mb-2"><a href="{{ route('program') }}" class="text-decoration-none text-muted">Program</a></li>
+                    <li class="mb-2"><a href="{{ route('program.index') }}" class="text-decoration-none text-muted">Program</a></li>
                     <li class="mb-2"><a href="{{ route('contact') }}" class="text-decoration-none text-muted">Contact</a></li>
                 </ul>
             </div>
@@ -29,8 +29,8 @@
             <div class="col-md-3 mb-4">
                 <h6 class="fw-bold">Academic</h6>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="{{ route('pengumuman') }}" class="text-decoration-none text-muted">Pengumuman</a></li>
-                    <li class="mb-2"><a href="{{ route('berita') }}" class="text-decoration-none text-muted">Berita</a></li>
+                    <li class="mb-2"><a href="{{ route('pengumuman.index') }}" class="text-decoration-none text-muted">Pengumuman</a></li>
+                    <li class="mb-2"><a href="{{ route('berita.index') }}" class="text-decoration-none text-muted">Berita</a></li>
                     <li class="mb-2"><a href="{{ route('akademik') }}" class="text-decoration-none text-muted">Akademik</a></li>
                     <li class="mb-2"><a href="{{ route('gallery') }}" class="text-decoration-none text-muted">Gallery</a></li>
                 </ul>

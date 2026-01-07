@@ -12,8 +12,8 @@
                     <div class="col-md-8">
                         <h1 class="fw-bold display-6 mb-3">Academic Programs & Curriculum</h1>
                         <p class="lead mb-4">Comprehensive educational programs designed to nurture future leaders and innovators</p>
-                        <a href="#enroll" class="btn btn-light btn-lg fw-bold">
-                            <i class="fas fa-file-signature me-2"></i>Enroll Now
+                        <a href="{{ route('program.create') }}" class="btn btn-light btn-lg fw-bold">
+                            <i class="fas fa-plus me-2"></i>Tambah Program Baru
                         </a>
                     </div>
                     <div class="col-md-4 text-center">
@@ -31,12 +31,12 @@
             <div class="row">
                 @php
                     $categories = [
-                        ['title' => 'STEM Program', 'icon' => 'fas fa-atom', 'count' => 12, 'color' => 'primary'],
-                        ['title' => 'Language Arts', 'icon' => 'fas fa-language', 'count' => 8, 'color' => 'success'],
-                        ['title' => 'Social Sciences', 'icon' => 'fas fa-globe-asia', 'count' => 10, 'color' => 'warning'],
-                        ['title' => 'Arts & Music', 'icon' => 'fas fa-palette', 'count' => 15, 'color' => 'danger'],
-                        ['title' => 'Sports & Health', 'icon' => 'fas fa-running', 'count' => 7, 'color' => 'info'],
-                        ['title' => 'Technology', 'icon' => 'fas fa-laptop-code', 'count' => 14, 'color' => 'secondary'],
+                        ['title' => 'STEM Program', 'icon' => 'fas fa-atom', 'color' => 'primary'],
+                        ['title' => 'Language Arts', 'icon' => 'fas fa-language', 'color' => 'success'],
+                        ['title' => 'Social Sciences', 'icon' => 'fas fa-globe-asia', 'color' => 'warning'],
+                        ['title' => 'Arts & Music', 'icon' => 'fas fa-palette', 'color' => 'danger'],
+                        ['title' => 'Sports & Health', 'icon' => 'fas fa-running', 'color' => 'info'],
+                        ['title' => 'Technology', 'icon' => 'fas fa-laptop-code', 'color' => 'secondary'],
                     ];
                 @endphp
                 
@@ -48,8 +48,11 @@
                                 <i class="{{ $category['icon'] }} fa-3x text-{{ $category['color'] }}"></i>
                             </div>
                             <h4 class="fw-bold mb-2">{{ $category['title'] }}</h4>
-                            <p class="text-muted">{{ $category['count'] }} Programs Available</p>
-                            <a href="#" class="btn btn-outline-{{ $category['color'] }}">Explore Programs</a>
+                            @php
+                                $count = $programs->where('category', $category['title'])->count();
+                            @endphp
+                            <p class="text-muted">{{ $count }} Programs Available</p>
+                            <a href="#" class="btn btn-outline-{{ $category['color'] }}">Lihat Program</a>
                         </div>
                     </div>
                 </div>
@@ -61,168 +64,200 @@
     <!-- Featured Programs -->
     <div class="row mb-5">
         <div class="col">
-            <h2 class="fw-bold mb-4">Featured Programs</h2>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold mb-0">Featured Programs</h2>
+                <a href="{{ route('program.create') }}" class="btn btn-gradient">
+                    <i class="fas fa-plus me-2"></i>Tambah Program
+                </a>
+            </div>
             <div class="row">
-                @php
-                    $featuredPrograms = [
-                        ['title' => 'International Baccalaureate (IB)', 'desc' => 'Globally recognized program for students aged 16-19', 'duration' => '2 Years', 'level' => 'Advanced', 'seats' => 'Limited'],
-                        ['title' => 'Advanced Placement (AP)', 'desc' => 'College-level courses and exams for high school students', 'duration' => '1 Year', 'level' => 'College', 'seats' => 'Available'],
-                        ['title' => 'STEAM Program', 'desc' => 'Integrating Arts into STEM education', 'duration' => '3 Years', 'level' => 'Intermediate', 'seats' => 'Open'],
-                        ['title' => 'Dual Language Immersion', 'desc' => 'Bilingual education program', 'duration' => '4 Years', 'level' => 'Beginner', 'seats' => 'Limited'],
-                    ];
-                @endphp
-                
-                @foreach ($featuredPrograms as $program)
+                @forelse($programs->where('featured', true) as $program)
                 <div class="col-md-6 mb-4">
                     <div class="card border-0 shadow-sm card-hover h-100">
                         <div class="card-body p-4">
                             <div class="d-flex justify-content-between align-items-start mb-3">
-                                <h5 class="fw-bold">{{ $program['title'] }}</h5>
-                                <span class="badge bg-{{ $program['seats'] == 'Limited' ? 'danger' : 'success' }}">
-                                    {{ $program['seats'] }} Seats
+                                <h5 class="fw-bold">{{ $program->title }}</h5>
+                                <span class="badge bg-{{ $program->seats_status == 'Limited' ? 'danger' : 'success' }}">
+                                    {{ $program->seats_status }} Seats
                                 </span>
                             </div>
-                            <p class="text-muted mb-4">{{ $program['desc'] }}</p>
+                            <p class="text-muted mb-4">{{ $program->description }}</p>
                             <div class="row">
                                 <div class="col">
                                     <small class="text-muted">Duration</small>
-                                    <p class="fw-bold mb-0">{{ $program['duration'] }}</p>
+                                    <p class="fw-bold mb-0">{{ $program->duration }}</p>
                                 </div>
                                 <div class="col">
                                     <small class="text-muted">Level</small>
-                                    <p class="fw-bold mb-0">{{ $program['level'] }}</p>
+                                    <p class="fw-bold mb-0">{{ $program->level }}</p>
                                 </div>
                                 <div class="col">
                                     <small class="text-muted">Start Date</small>
-                                    <p class="fw-bold mb-0">Sept 2026</p>
+                                   <p class="fw-bold mb-0">
+                                    {{ optional($program->start_date)->format('M Y') ?? '-' }}
+                                </p>
                                 </div>
                             </div>
                             <div class="d-grid gap-2 mt-4">
-                                <button class="btn btn-outline-primary">Program Details</button>
-                                <button class="btn btn-gradient">Apply Now</button>
+                                <a href="{{ route('program.show', $program->id) }}" class="btn btn-outline-primary">Program Details</a>
+                                <div class="dropdown">
+                                    <button class="btn btn-gradient dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-cog me-1"></i> Action
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('program.show', $program->id) }}">
+                                                <i class="fas fa-eye me-2"></i> Lihat Detail
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('program.edit', $program->id) }}">
+                                                <i class="fas fa-edit me-2"></i> Edit
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <form action="{{ route('program.destroy', $program->id) }}" 
+                                                  method="POST" 
+                                                  id="delete-form-{{ $program->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" 
+                                                        class="dropdown-item text-danger"
+                                                        onclick="confirmDelete({{ $program->id }}, '{{ $program->title }}')">
+                                                    <i class="fas fa-trash me-2"></i> Hapus
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
-    <!-- Curriculum Structure -->
-    <div class="row" id="enroll">
-        <div class="col">
-            <div class="card border-0 shadow-sm">
-                <div class="card-header bg-white border-0 py-3">
-                    <h4 class="fw-bold mb-0">
-                        <i class="fas fa-layer-group me-2 text-primary"></i>Curriculum Structure
-                    </h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="text-center p-4">
-                                <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex p-4 mb-3">
-                                    <i class="fas fa-child fa-3x text-primary"></i>
-                                </div>
-                                <h5 class="fw-bold">Elementary School</h5>
-                                <p class="text-muted">Grade 1-6</p>
-                                <ul class="list-unstyled text-start">
-                                    <li><i class="fas fa-check text-success me-2"></i>Basic Literacy & Numeracy</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Social Skills Development</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Creative Arts</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="text-center p-4">
-                                <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex p-4 mb-3">
-                                    <i class="fas fa-user-graduate fa-3x text-success"></i>
-                                </div>
-                                <h5 class="fw-bold">Middle School</h5>
-                                <p class="text-muted">Grade 7-9</p>
-                                <ul class="list-unstyled text-start">
-                                    <li><i class="fas fa-check text-success me-2"></i>Core Subject Specialization</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Project-Based Learning</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Career Exploration</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="text-center p-4">
-                                <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex p-4 mb-3">
-                                    <i class="fas fa-university fa-3x text-warning"></i>
-                                </div>
-                                <h5 class="fw-bold">High School</h5>
-                                <p class="text-muted">Grade 10-12</p>
-                                <ul class="list-unstyled text-start">
-                                    <li><i class="fas fa-check text-success me-2"></i>Advanced Placement Courses</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>College Preparation</li>
-                                    <li><i class="fas fa-check text-success me-2"></i>Leadership Development</li>
-                                </ul>
-                            </div>
-                        </div>
+                @empty
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> Belum ada program featured.
                     </div>
                 </div>
+                @endforelse
             </div>
         </div>
     </div>
 
-    <!-- Enrollment Form -->
-    <div class="row mt-5">
+    <!-- All Programs -->
+    <div class="row mb-5">
         <div class="col">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body p-5">
-                    <h3 class="fw-bold text-center mb-4">Enrollment Form</h3>
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Student Name</label>
-                                <input type="text" class="form-control" placeholder="Enter student name">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Grade Level</label>
-                                <select class="form-select">
-                                    <option selected>Select Grade</option>
-                                    <option>Grade 1-6 (Elementary)</option>
-                                    <option>Grade 7-9 (Middle School)</option>
-                                    <option>Grade 10-12 (High School)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Parent/Guardian Name</label>
-                                <input type="text" class="form-control" placeholder="Enter parent/guardian name">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Contact Number</label>
-                                <input type="tel" class="form-control" placeholder="Enter contact number">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Email Address</label>
-                            <input type="email" class="form-control" placeholder="Enter email address">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Program of Interest</label>
-                            <select class="form-select">
-                                <option selected>Select Program</option>
-                                <option>International Baccalaureate (IB)</option>
-                                <option>Advanced Placement (AP)</option>
-                                <option>STEAM Program</option>
-                                <option>Dual Language Immersion</option>
-                            </select>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-gradient btn-lg px-5">
-                                <i class="fas fa-paper-plane me-2"></i>Submit Application
-                            </button>
-                        </div>
-                    </form>
-                </div>
+            <h2 class="fw-bold mb-4">All Programs</h2>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Program</th>
+                            <th>Category</th>
+                            <th>Duration</th>
+                            <th>Level</th>
+                            <th>Seats</th>
+                            <th>Start Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($programs as $program)
+                        <tr>
+                            <td>
+                                <strong>{{ $program->title }}</strong>
+                                @if($program->featured)
+                                <span class="badge bg-warning ms-2">Featured</span>
+                                @endif
+                            </td>
+                            <td>{{ $program->category }}</td>
+                            <td>{{ $program->duration }}</td>
+                            <td>{{ $program->level }}</td>
+                            <td>
+                                <span class="badge bg-{{ $program->seats_status == 'Limited' ? 'danger' : 'success' }}">
+                                    {{ $program->seats_status }}
+                                </span>
+                            </td>
+                            <td>{{ optional($program->start_date)->format('d M Y') ?? '-' }}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ route('program.show', $program->id) }}" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{ route('program.edit', $program->id) }}" class="btn btn-sm btn-outline-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button type="button" 
+                                            class="btn btn-sm btn-outline-danger"
+                                            onclick="confirmDelete({{ $program->id }}, '{{ $program->title }}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <form action="{{ route('program.destroy', $program->id) }}" 
+                                          method="POST" 
+                                          id="delete-form-{{ $program->id }}"
+                                          style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="7" class="text-center py-4">
+                                <i class="fas fa-book-open fa-2x text-muted mb-3"></i>
+                                <p class="text-muted">Belum ada program tersedia</p>
+                                <a href="{{ route('program.create') }}" class="btn btn-primary">
+                                    <i class="fas fa-plus me-2"></i>Tambah Program Pertama
+                                </a>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Toast Container -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+</div>
+
+@
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        @if(session('success'))
+            showToast('{{ session("success") }}', 'success');
+        @endif
+
+        @if($errors->any())
+            showToast('Terjadi kesalahan, silakan periksa form!', 'error');
+        @endif
+    });
+
+    function showToast(message, type = 'success') {
+        const toast = $(`
+            <div class="toast align-items-center text-bg-${type} border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        `);
+        $('.toast-container').append(toast);
+        new bootstrap.Toast(toast[0]).show();
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    function confirmDelete(id, title) {
+        if (confirm(`Yakin ingin menghapus program "${title}"?`)) {
+            document.getElementById(`delete-form-${id}`).submit();
+        }
+    }
+</script>
+@endsection
 @endsection

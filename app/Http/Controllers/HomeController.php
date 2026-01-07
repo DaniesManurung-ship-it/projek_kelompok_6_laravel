@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\BeritaController;
 
 class HomeController extends Controller
 {
@@ -26,35 +27,35 @@ class HomeController extends Controller
         return view('gallery');
     }
 
-    public function announcement()
-    {
-        return view('pengumuman');
-    }
+ //   public function announcement()
+//    {
+ //       return view('pengumuman');
+  //  }
 
-    public function program()
-    {
-        return view('program');
-    }
+    //public function program()
+    //{
+     //   return view('program');
+   // }
 
     public function contact()
     {
         return view('contact');
     }
 
-    public function news()
-    {
-        return view('berita');
-    }
+ //   public function news()
+ //   {
+   //     return view('berita.index');
+  // }
 
     public function academic()
     {
         return view('akademik');
     }
 
-    public function schedule()
-    {
-        return view('schedule');
-    }
+ //   public function schedule()
+  //  {
+   //     return view('schedule');
+   // }
 
     public function messages()
     {
@@ -66,8 +67,8 @@ class HomeController extends Controller
         return view('documents');
     }
 
-    public function reports()
-    {
-        return view('reports');
-    }
+ //   public function reports()
+   // {
+   //     return view('reports');
+    //}
 }

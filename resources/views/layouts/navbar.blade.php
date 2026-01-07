@@ -63,9 +63,9 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a class="dropdown-item" href="{{ route('profile') }}">
-                            <i class="fas fa-user me-2"></i>Profil
-                        </a>
+                        <a class="nav-link {{ request()->routeIs('profile*') ? 'active' : '' }}" href="{{ route('profile.index') }}">
+        <i class="fas fa-user me-1"></i>Profile
+    </a>
                         <div class="dropdown-divider"></div>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf

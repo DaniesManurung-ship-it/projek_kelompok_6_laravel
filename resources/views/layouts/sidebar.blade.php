@@ -55,25 +55,26 @@
                 </a>
             </li>
 
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white {{ request()->routeIs('pengumuman') ? 'active bg-dark text-dark rounded' : '' }}"
-                   href="{{ route('pengumuman') }}">
-                    <i class="fas fa-bullhorn me-3"></i>Pengumuman
-                </a>
-            </li>
+<li class="nav-item mb-2">
+    <a class="nav-link text-white {{ request()->routeIs('pengumuman*') ? 'active bg-warning text-dark rounded' : '' }}"
+       href="{{ route('pengumuman.index') }}">
+        <i class="fas fa-bullhorn me-3"></i>Pengumuman
+    </a>
+</li>
 
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white {{ request()->routeIs('program') ? 'active bg-danger text-dark rounded' : '' }}"
-                   href="{{ route('program') }}">
-                    <i class="fas fa-project-diagram me-3"></i>Program
-                </a>
-            </li>
+<li class="nav-item mb-2">
+    <a class="nav-link text-white {{ request()->routeIs('program*') ? 'active bg-danger text-white rounded' : '' }}"
+       href="{{ route('program.index') }}">
+        <i class="fas fa-project-diagram me-3"></i>Program
+    </a>
+</li>
 
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white {{ request()->routeIs('berita') ? 'active bg-secondary text-dark rounded' : '' }}"
-                   href="{{ route('berita') }}">
-                    <i class="fas fa-newspaper me-3"></i>Berita
-                </a>
+<li class="nav-item mb-2">
+    <a class="nav-link text-white {{ request()->routeIs('berita*') ? 'active bg-danger text-white rounded' : '' }}"
+       href="{{ route('berita.index') }}">
+        <i class="fas fa-newspaper me-3"></i>Berita
+    </a>
+</li>
             </li>
         </ul>
 
@@ -90,19 +91,19 @@
 
             <div class="collapse {{ request()->routeIs('schedule','reports') ? 'show' : '' }}" id="academicMenu">
                 <ul class="nav flex-column ms-4">
-                    <li class="nav-item mb-1">
-                        <a class="nav-link text-white {{ request()->routeIs('schedule') ? 'active bg-primary text-dark rounded' : '' }}"
-                           href="{{ route('schedule') }}">
-                            <i class="fas fa-calendar-alt me-2"></i>Schedule
-                        </a>
-                    </li>
+<li class="nav-item mb-2">
+    <a class="nav-link text-white {{ request()->routeIs('schedule*') ? 'active bg-danger text-white rounded' : '' }}"
+       href="{{ route('schedule.index') }}">
+        <i class="fas fa-calendar-alt me-3"></i>Schedule
+    </a>
+</li>
 
-                    <li class="nav-item mb-1">
-                        <a class="nav-link text-white {{ request()->routeIs('reports') ? 'active bg-primary text-dark rounded' : '' }}"
-                           href="{{ route('reports') }}">
-                            <i class="fas fa-chart-line me-2"></i>Reports
-                        </a>
-                    </li>
+<li class="nav-item mb-2">
+    <a class="nav-link text-white {{ request()->routeIs('report*') ? 'active bg-danger text-white rounded' : '' }}"
+       href="{{ route('report.index') }}">
+        <i class="fas fa-chart-bar me-3"></i>Reports
+    </a>
+</li>
                 </ul>
             </div>
         </ul>

@@ -13,62 +13,46 @@
                         <div class="bg-gradient-1 rounded-circle d-inline-flex p-3 mb-4">
                             <i class="fas fa-graduation-cap fa-3x text-white"></i>
                         </div>
-                        <h2 class="fw-bold text-dark mb-2">Create Account</h2>
-                        <p class="text-muted">Join SchoolPro and manage your school efficiently</p>
+                        <h2 class="fw-bold text-dark mb-2">Buat Akun Baru</h2>
+                        <p class="text-muted">Bergabung dengan SchoolPro</p>
                     </div>
 
                     <!-- Registration Form -->
                     <form method="POST" action="{{ route('register.post') }}" id="registerForm">
                         @csrf
                         
-                        <!-- Personal Information Section -->
+                        <!-- Personal Information -->
                         <div class="mb-4">
                             <h5 class="fw-bold mb-3 border-bottom pb-2">
-                                <i class="fas fa-user-circle me-2 text-primary"></i>Personal Information
+                                <i class="fas fa-user-circle me-2 text-primary"></i>Informasi Pribadi
                             </h5>
                             
-                            <!-- Full Name -->
-                            <div class="row mb-3">
-                                <div class="col-md-6 mb-3 mb-md-0">
-                                    <label for="first_name" class="form-label">First Name</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light border-end-0">
-                                            <i class="fas fa-user text-primary"></i>
-                                        </span>
-                                        <input type="text" class="form-control border-start-0" id="first_name" 
-                                               name="first_name" value="{{ old('first_name') }}" required
-                                               placeholder="Enter first name">
-                                    </div>
-                                    @error('first_name')
-                                        <span class="text-danger small d-block mt-1">{{ $message }}</span>
-                                    @enderror
+                            <!-- Name -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama Lengkap *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0">
+                                        <i class="fas fa-user text-primary"></i>
+                                    </span>
+                                    <input type="text" class="form-control border-start-0" id="name" 
+                                           name="name" value="{{ old('name') }}" required
+                                           placeholder="Masukkan nama lengkap">
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="last_name" class="form-label">Last Name</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light border-end-0">
-                                            <i class="fas fa-user text-primary"></i>
-                                        </span>
-                                        <input type="text" class="form-control border-start-0" id="last_name" 
-                                               name="last_name" value="{{ old('last_name') }}" required
-                                               placeholder="Enter last name">
-                                    </div>
-                                    @error('last_name')
-                                        <span class="text-danger small d-block mt-1">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                @error('name')
+                                    <span class="text-danger small d-block mt-1">{{ $message }}</span>
+                                @enderror
                             </div>
                             
                             <!-- Email -->
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email Address</label>
+                                <label for="email" class="form-label">Email *</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0">
                                         <i class="fas fa-envelope text-primary"></i>
                                     </span>
                                     <input type="email" class="form-control border-start-0" id="email" 
                                            name="email" value="{{ old('email') }}" required
-                                           placeholder="Enter your email">
+                                           placeholder="Masukkan email">
                                 </div>
                                 @error('email')
                                     <span class="text-danger small d-block mt-1">{{ $message }}</span>
@@ -77,14 +61,14 @@
                             
                             <!-- Phone -->
                             <div class="mb-3">
-                                <label for="phone" class="form-label">Phone Number</label>
+                                <label for="phone" class="form-label">Nomor Telepon</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0">
                                         <i class="fas fa-phone text-primary"></i>
                                     </span>
                                     <input type="tel" class="form-control border-start-0" id="phone" 
                                            name="phone" value="{{ old('phone') }}"
-                                           placeholder="Enter phone number">
+                                           placeholder="Contoh: 081234567890">
                                 </div>
                                 @error('phone')
                                     <span class="text-danger small d-block mt-1">{{ $message }}</span>
@@ -92,30 +76,24 @@
                             </div>
                         </div>
 
-                        <!-- Account Information Section -->
+                        <!-- Account Information -->
                         <div class="mb-4">
                             <h5 class="fw-bold mb-3 border-bottom pb-2">
-                                <i class="fas fa-lock me-2 text-primary"></i>Account Information
+                                <i class="fas fa-lock me-2 text-primary"></i>Informasi Akun
                             </h5>
                             
                             <!-- Password -->
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                                <label for="password" class="form-label">Password *</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0">
                                         <i class="fas fa-lock text-primary"></i>
                                     </span>
                                     <input type="password" class="form-control border-start-0" id="password" 
-                                           name="password" required placeholder="Create password">
+                                           name="password" required placeholder="Buat password (min. 6 karakter)">
                                     <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                </div>
-                                <div class="password-strength mt-2">
-                                    <div class="progress" style="height: 5px;">
-                                        <div class="progress-bar" id="passwordStrength" style="width: 0%"></div>
-                                    </div>
-                                    <small class="text-muted d-block mt-1">Password strength: <span id="strengthText">Very weak</span></small>
                                 </div>
                                 @error('password')
                                     <span class="text-danger small d-block mt-1">{{ $message }}</span>
@@ -124,41 +102,35 @@
                             
                             <!-- Confirm Password -->
                             <div class="mb-4">
-                                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                <label for="password_confirmation" class="form-label">Konfirmasi Password *</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0">
                                         <i class="fas fa-lock text-primary"></i>
                                     </span>
                                     <input type="password" class="form-control border-start-0" id="password_confirmation" 
-                                           name="password_confirmation" required placeholder="Confirm password">
+                                           name="password_confirmation" required placeholder="Konfirmasi password">
                                     <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </div>
-                                <small id="passwordMatch" class="text-success d-none mt-1">
-                                    <i class="fas fa-check-circle"></i> Passwords match
-                                </small>
-                                <small id="passwordMismatch" class="text-danger d-none mt-1">
-                                    <i class="fas fa-times-circle"></i> Passwords do not match
-                                </small>
                             </div>
                         </div>
 
-                        <!-- Role Selection -->
+                        <!-- Role Selection - HANYA TEACHER & STUDENT -->
                         <div class="mb-4">
                             <h5 class="fw-bold mb-3 border-bottom pb-2">
-                                <i class="fas fa-user-tag me-2 text-primary"></i>Select Role
+                                <i class="fas fa-user-tag me-2 text-primary"></i>Pilih Peran
                             </h5>
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-check card-option">
-                                        <input class="form-check-input" type="radio" name="role" id="roleAdmin" value="admin" {{ old('role') == 'admin' ? 'checked' : '' }}>
-                                        <label class="form-check-label w-100" for="roleAdmin">
+                                        <input class="form-check-input" type="radio" name="role" id="roleTeacher" value="teacher" {{ old('role', 'teacher') == 'teacher' ? 'checked' : '' }} required>
+                                        <label class="form-check-label w-100" for="roleTeacher">
                                             <div class="card border-2 card-hover h-100">
                                                 <div class="card-body text-center">
-                                                    <i class="fas fa-user-shield fa-2x text-primary mb-3"></i>
-                                                    <h6 class="fw-bold">Administrator</h6>
-                                                    <small class="text-muted">Full access to all features</small>
+                                                    <i class="fas fa-chalkboard-teacher fa-2x text-primary mb-3"></i>
+                                                    <h6 class="fw-bold">Guru</h6>
+                                                    <small class="text-muted">Mengelola kelas dan siswa</small>
                                                 </div>
                                             </div>
                                         </label>
@@ -166,13 +138,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-check card-option">
-                                        <input class="form-check-input" type="radio" name="role" id="roleTeacher" value="teacher" {{ old('role') == 'teacher' ? 'checked' : 'checked' }}>
-                                        <label class="form-check-label w-100" for="roleTeacher">
+                                        <input class="form-check-input" type="radio" name="role" id="roleStudent" value="student" {{ old('role') == 'student' ? 'checked' : '' }}>
+                                        <label class="form-check-label w-100" for="roleStudent">
                                             <div class="card border-2 card-hover h-100">
                                                 <div class="card-body text-center">
-                                                    <i class="fas fa-chalkboard-teacher fa-2x text-success mb-3"></i>
-                                                    <h6 class="fw-bold">Teacher</h6>
-                                                    <small class="text-muted">Manage classes and students</small>
+                                                    <i class="fas fa-user-graduate fa-2x text-success mb-3"></i>
+                                                    <h6 class="fw-bold">Siswa</h6>
+                                                    <small class="text-muted">Mengakses materi pembelajaran</small>
                                                 </div>
                                             </div>
                                         </label>
@@ -189,7 +161,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
                                 <label class="form-check-label" for="terms">
-                                    I agree to the <a href="#" class="text-primary text-decoration-none">Terms of Service</a> and <a href="#" class="text-primary text-decoration-none">Privacy Policy</a>
+                                    Saya setuju dengan <a href="#" class="text-primary text-decoration-none">Syarat & Ketentuan</a> dan <a href="#" class="text-primary text-decoration-none">Kebijakan Privasi</a>
                                 </label>
                             </div>
                             @error('terms')
@@ -199,43 +171,24 @@
 
                         <!-- Submit Button -->
                         <button type="submit" class="btn btn-gradient w-100 py-2 fw-bold mb-4" id="registerButton">
-                            <i class="fas fa-user-plus me-2"></i>Create Account
+                            <i class="fas fa-user-plus me-2"></i>Buat Akun
                         </button>
-
-                        <!-- Divider -->
-                        <div class="position-relative text-center mb-4">
-                            <hr>
-                            <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
-                                Or register with
-                            </span>
-                        </div>
-
-                        <!-- Social Registration -->
-                        <div class="row g-2 mb-4">
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-outline-primary w-100">
-                                    <i class="fab fa-google me-2"></i>Google
-                                </button>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-outline-info w-100">
-                                    <i class="fab fa-twitter me-2"></i>Twitter
-                                </button>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-outline-dark w-100">
-                                    <i class="fab fa-github me-2"></i>GitHub
-                                </button>
-                            </div>
-                        </div>
 
                         <!-- Login Link -->
                         <div class="text-center">
-                            <p class="text-muted mb-0">Already have an account? 
+                            <p class="text-muted mb-0">Sudah punya akun? 
                                 <a href="{{ route('login') }}" class="text-decoration-none fw-bold text-primary">
-                                    Sign in here
+                                    Login di sini
                                 </a>
                             </p>
+                        </div>
+
+                        <!-- Info Admin -->
+                        <div class="mt-4 p-3 bg-light rounded">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i> 
+                                <strong>Info:</strong> Untuk akun admin, hubungi administrator sistem.
+                            </small>
                         </div>
                     </form>
                 </div>
@@ -245,7 +198,6 @@
 </div>
 
 <style>
-    /* Custom styling for register page */
     .card-option .form-check-input {
         position: absolute;
         opacity: 0;
@@ -266,169 +218,66 @@
         border-color: var(--primary-color) !important;
         background-color: rgba(79, 70, 229, 0.05);
     }
-    
-    /* Password strength indicator */
-    .password-strength .progress-bar {
-        transition: width 0.3s, background-color 0.3s;
-    }
-    
-    /* Form validation styling */
-    .form-control:focus {
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 767.98px) {
-        .card-body {
-            padding: 1.5rem !important;
-        }
-        
-        .card-option .card-body {
-            padding: 1rem !important;
-        }
-        
-        .card-option .card-body i {
-            font-size: 1.5rem !important;
-        }
-    }
-    
-    /* Animation for form sections */
-    h5.border-bottom {
-        transition: all 0.3s;
-    }
-    
-    h5.border-bottom:hover {
-        color: var(--primary-color);
-    }
 </style>
 
 @section('scripts')
 <script>
-    $(document).ready(function() {
+    document.addEventListener('DOMContentLoaded', function() {
         // Toggle password visibility
-        $('#togglePassword').click(function() {
-            const passwordField = $('#password');
-            const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
-            passwordField.attr('type', type);
-            $(this).find('i').toggleClass('fa-eye fa-eye-slash');
-        });
+        const togglePassword = document.getElementById('togglePassword');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const passwordField = document.getElementById('password');
+        const confirmField = document.getElementById('password_confirmation');
         
-        $('#toggleConfirmPassword').click(function() {
-            const confirmField = $('#password_confirmation');
-            const type = confirmField.attr('type') === 'password' ? 'text' : 'password';
-            confirmField.attr('type', type);
-            $(this).find('i').toggleClass('fa-eye fa-eye-slash');
-        });
-        
-        // Password strength checker
-        $('#password').on('input', function() {
-            const password = $(this).val();
-            let strength = 0;
-            let text = 'Very weak';
-            let color = '#dc3545';
-            
-            // Length check
-            if (password.length >= 8) strength += 25;
-            
-            // Contains lowercase
-            if (/[a-z]/.test(password)) strength += 25;
-            
-            // Contains uppercase
-            if (/[A-Z]/.test(password)) strength += 25;
-            
-            // Contains numbers or special chars
-            if (/[0-9!@#$%^&*]/.test(password)) strength += 25;
-            
-            // Update strength text and color
-            if (strength >= 75) {
-                text = 'Strong';
-                color = '#198754';
-            } else if (strength >= 50) {
-                text = 'Moderate';
-                color = '#ffc107';
-            } else if (strength >= 25) {
-                text = 'Weak';
-                color = '#fd7e14';
-            }
-            
-            $('#passwordStrength').css({
-                'width': strength + '%',
-                'background-color': color
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function() {
+                const type = passwordField.type === 'password' ? 'text' : 'password';
+                passwordField.type = type;
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
             });
-            $('#strengthText').text(text).css('color', color);
-        });
-        
-        // Password match checker
-        function checkPasswordMatch() {
-            const password = $('#password').val();
-            const confirmPassword = $('#password_confirmation').val();
-            
-            if (confirmPassword.length === 0) {
-                $('#passwordMatch').addClass('d-none');
-                $('#passwordMismatch').addClass('d-none');
-                return;
-            }
-            
-            if (password === confirmPassword) {
-                $('#passwordMatch').removeClass('d-none');
-                $('#passwordMismatch').addClass('d-none');
-            } else {
-                $('#passwordMatch').addClass('d-none');
-                $('#passwordMismatch').removeClass('d-none');
-            }
         }
         
-        $('#password, #password_confirmation').on('input', checkPasswordMatch);
+        if (toggleConfirmPassword) {
+            toggleConfirmPassword.addEventListener('click', function() {
+                const type = confirmField.type === 'password' ? 'text' : 'password';
+                confirmField.type = type;
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+        }
         
-        // Form submission handler
-        $('#registerForm').submit(function(e) {
-            const submitBtn = $('#registerButton');
-            const originalHtml = submitBtn.html();
-            
-            // Disable button and show loading
-            submitBtn.prop('disabled', true);
-            submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i>Creating Account...');
-            
-            // Check if passwords match
-            if ($('#password').val() !== $('#password_confirmation').val()) {
-                alert('Passwords do not match!');
-                submitBtn.html(originalHtml);
-                submitBtn.prop('disabled', false);
-                return false;
-            }
-            
-            // Check if terms are accepted
-            if (!$('#terms').is(':checked')) {
-                alert('Please accept the Terms of Service and Privacy Policy');
-                submitBtn.html(originalHtml);
-                submitBtn.prop('disabled', false);
-                return false;
-            }
-            
-            // Re-enable after 5 seconds if still processing
-            setTimeout(function() {
-                submitBtn.html(originalHtml);
-                submitBtn.prop('disabled', false);
-            }, 5000);
-        });
+        // Form validation
+        const form = document.getElementById('registerForm');
+        const submitBtn = document.getElementById('registerButton');
         
-        // Auto-focus on first field
-        $('#first_name').focus();
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                if (submitBtn) {
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Membuat Akun...';
+                    
+                    // Reset button after 5 seconds if still processing
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 5000);
+                }
+            });
+        }
         
-        // Role selection animation
-        $('.card-option .card').click(function() {
-            $('.card-option .card').removeClass('border-primary');
-            $(this).addClass('border-primary');
-        });
-        
-        // Input validation on blur
-        $('input[required]').blur(function() {
-            if (!$(this).val()) {
-                $(this).addClass('is-invalid');
-            } else {
-                $(this).removeClass('is-invalid');
-            }
+        // Role selection
+        const roleCards = document.querySelectorAll('.card-option .card');
+        roleCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const radio = this.closest('.form-check').querySelector('input[type="radio"]');
+                if (radio) {
+                    radio.checked = true;
+                    roleCards.forEach(c => c.classList.remove('border-primary'));
+                    this.classList.add('border-primary');
+                }
+            });
         });
     });
 </script>

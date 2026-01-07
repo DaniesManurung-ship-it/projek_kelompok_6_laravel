@@ -13,140 +13,148 @@
                     </h1>
                     <p class="text-muted">Informasi terbaru dan penting dari sekolah</p>
                 </div>
-                <button class="btn btn-gradient" data-bs-toggle="modal" data-bs-target="#addAnnouncement">
+                <a href="{{ route('pengumuman.create') }}" class="btn btn-gradient">
                     <i class="fas fa-plus me-2"></i>Tambah Pengumuman
-                </button>
+                </a>
             </div>
         </div>
     </div>
 
     <!-- Important Announcements -->
+    @if($announcements->where('important', true)->count() > 0)
     <div class="row mb-5">
         <div class="col">
+            @foreach($announcements->where('important', true)->take(1) as $important)
             <div class="bg-gradient-1 text-white rounded p-4">
                 <div class="d-flex align-items-center">
                     <div class="bg-white rounded-circle p-3 me-4">
                         <i class="fas fa-exclamation-triangle fa-2x text-danger"></i>
                     </div>
                     <div>
-                        <h4 class="fw-bold mb-2">PENTING: Jadwal Ujian Semester Genap 2026</h4>
-                        <p class="mb-2">Ujian semester genap akan dilaksanakan tanggal 3-15 Juni 2026. Silakan cek jadwal lengkap di portal akademik.</p>
-                        <small><i class="far fa-clock me-1"></i> Diposting: 25 Mei 2026 | <i class="fas fa-eye me-1 ms-2"></i> 1,245 views</small>
+                        <h4 class="fw-bold mb-2">PENTING: {{ $important->title }}</h4>
+                        <p class="mb-2">{{ Str::limit($important->content, 200) }}</p>
+                        <small>
+                            <i class="far fa-clock me-1"></i> 
+                            {{ $important->publish_date->format('d M Y') }} | 
+                            <i class="fas fa-eye me-1 ms-2"></i> {{ $important->views }} views
+                        </small>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
+    @endif
 
     <!-- Announcements List -->
     <div class="row">
-        @php
-            $announcements = [
-                ['title' => 'Penerimaan Siswa Baru TP 2025/2026', 'content' => 'Pendaftaran dibuka mulai 1 Juni - 30 Juni 2026. Syarat dan ketentuan dapat dilihat di website.', 'type' => 'Admission', 'date' => '2026-05-20', 'views' => 892, 'important' => true],
-                ['title' => 'Libur Hari Raya Idul Fitri 1445 H', 'content' => 'Sekolah akan diliburkan tanggal 8-12 April 2026. Kegiatan belajar mengajar akan kembali normal tanggal 15 April 2026.', 'type' => 'Holiday', 'date' => '2026-04-01', 'views' => 754, 'important' => false],
-                ['title' => 'Workshop Digital Literacy untuk Guru', 'content' => 'Workshop akan diadakan pada tanggal 25 Mei 2026 pukul 09.00 - 15.00 WIB di ruang multimedia.', 'type' => 'Workshop', 'date' => '2026-05-15', 'views' => 543, 'important' => false],
-                ['title' => 'Pengumuman Hasil Seleksi OSN 2026', 'content' => 'Hasil seleksi Olimpiade Sains Nasional tingkat sekolah dapat dilihat di papan pengumuman atau website sekolah.', 'type' => 'Competition', 'date' => '2026-05-10', 'views' => 1,203, 'important' => true],
-                ['title' => 'Perubahan Jadwal Ekstrakurikuler', 'content' => 'Ada perubahan jadwal untuk ekstrakurikuler basket dan paduan suara. Silakan cek jadwal terbaru.', 'type' => 'Schedule', 'date' => '2026-05-05', 'views' => 432, 'important' => false],
-                ['title' => 'Sosialisasi Program Beasiswa', 'content' => 'Akan diadakan sosialisasi program beasiswa untuk siswa berprestasi pada tanggal 30 Mei 2026.', 'type' => 'Scholarship', 'date' => '2026-05-03', 'views' => 678, 'important' => false],
-                ['title' => 'Pemeliharaan Sistem IT', 'content' => 'Akan dilakukan pemeliharaan sistem IT pada tanggal 28 Mei 2026 pukul 00.00 - 05.00 WIB. Sistem mungkin tidak dapat diakses.', 'type' => 'Maintenance', 'date' => '2026-05-25', 'views' => 321, 'important' => false],
-                ['title' => 'Kegiatan Bakti Sosial', 'content' => 'Siswa diundang untuk berpartisipasi dalam kegiatan bakti sosial di panti asuhan pada tanggal 1 Juni 2026.', 'type' => 'Event', 'date' => '2026-05-22', 'views' => 456, 'important' => false],
-            ];
-        @endphp
-        
-        @foreach ($announcements as $announcement)
+        @forelse($announcements as $announcement)
         <div class="col-md-6 mb-4">
-            <div class="card border-0 shadow-sm card-hover h-100 {{ $announcement['important'] ? 'border-start border-4 border-danger' : '' }}">
+            <div class="card border-0 shadow-sm card-hover h-100 {{ $announcement->important ? 'border-start border-4 border-danger' : '' }}">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge bg-{{ $announcement['important'] ? 'danger' : 'primary' }}">{{ $announcement['type'] }}</span>
+                        <span class="badge bg-{{ $announcement->important ? 'danger' : 'primary' }}">
+                            {{ $announcement->type }}
+                        </span>
                         <small class="text-muted">
-                            <i class="far fa-clock me-1"></i> {{ date('d M Y', strtotime($announcement['date'])) }}
+                            <i class="far fa-clock me-1"></i> 
+                            {{ $announcement->publish_date->format('d M Y') }}
                         </small>
                     </div>
-                    <h5 class="fw-bold mb-3">{{ $announcement['title'] }}</h5>
-                    <p class="text-muted mb-4">{{ $announcement['content'] }}</p>
+                    <h5 class="fw-bold mb-3">{{ $announcement->title }}</h5>
+                    <p class="text-muted mb-4">{{ Str::limit($announcement->content, 150) }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <i class="fas fa-eye text-muted me-1"></i>
-                            <small class="text-muted">{{ number_format($announcement['views']) }} views</small>
+                            <small class="text-muted">{{ number_format($announcement->views) }} views</small>
                         </div>
-                        <button class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-info-circle me-1"></i> Detail
-                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-primary dropdown-toggle" 
+                                    type="button" 
+                                    data-bs-toggle="dropdown">
+                                <i class="fas fa-cog me-1"></i> Aksi
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('pengumuman.show', $announcement->id) }}">
+                                        <i class="fas fa-eye me-2"></i> Lihat Detail
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('pengumuman.edit', $announcement->id) }}">
+                                        <i class="fas fa-edit me-2"></i> Edit
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form action="{{ route('pengumuman.destroy', $announcement->id) }}" 
+                                          method="POST" 
+                                          id="delete-form-{{ $announcement->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" 
+                                                class="dropdown-item text-danger"
+                                                onclick="confirmDelete({{ $announcement->id }}, '{{ $announcement->title }}')">
+                                            <i class="fas fa-trash me-2"></i> Hapus
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach
-    </div>
-
-    <!-- Pagination -->
-    <div class="row mt-4">
-        <div class="col">
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
+        @empty
+        <div class="col-12">
+            <div class="text-center py-5">
+                <i class="fas fa-bullhorn fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Belum ada pengumuman</h5>
+                <p class="text-muted">Tambahkan pengumuman pertama Anda</p>
+                <a href="{{ route('pengumuman.create') }}" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Tambah Pengumuman
+                </a>
+            </div>
         </div>
+        @endforelse
     </div>
 </div>
 
-<!-- Add Announcement Modal -->
-<div class="modal fade" id="addAnnouncement" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold">
-                    <i class="fas fa-plus-circle me-2"></i>Tambah Pengumuman Baru
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Judul Pengumuman</label>
-                        <input type="text" class="form-control" placeholder="Masukkan judul pengumuman">
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Kategori</label>
-                            <select class="form-select">
-                                <option selected>Umum</option>
-                                <option>Akademik</option>
-                                <option>Kegiatan</option>
-                                <option>Penting</option>
-                                <option>Beasiswa</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold">Tanggal Publikasi</label>
-                            <input type="date" class="form-control">
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Isi Pengumuman</label>
-                        <textarea class="form-control" rows="5" placeholder="Tulis isi pengumuman di sini..."></textarea>
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="importantCheck">
-                        <label class="form-check-label" for="importantCheck">Tandai sebagai pengumuman penting</label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-gradient">Simpan Pengumuman</button>
-            </div>
-        </div>
-    </div>
+<!-- Toast Container -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
 </div>
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        // Show success message
+        @if(session('success'))
+        showToast('{{ session("success") }}', 'success');
+        @endif
+
+        @if($errors->any())
+        showToast('Terjadi kesalahan, silakan periksa form!', 'error');
+        @endif
+    });
+
+    function showToast(message, type = 'success') {
+        const toast = $(`<div class="toast align-items-center text-bg-${type} border-0" role="alert">
+            <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>`);
+        $('.toast-container').append(toast);
+        const bsToast = new bootstrap.Toast(toast[0]);
+        bsToast.show();
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    function confirmDelete(id, title) {
+        if (confirm(`Yakin ingin menghapus pengumuman "${title}"?`)) {
+            document.getElementById(`delete-form-${id}`).submit();
+        }
+    }
+</script>
+@endsection
 @endsection

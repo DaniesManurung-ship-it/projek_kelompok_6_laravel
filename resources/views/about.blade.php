@@ -175,7 +175,7 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a href="{{ route('berita') }}" class="btn btn-outline-primary">
+                <a href="{{ route('berita.index') }}" class="btn btn-outline-primary">
                     View all news <i class="fas fa-arrow-right ms-2"></i>
                 </a>
             </div>
