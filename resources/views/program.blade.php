@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="col">
                                     <small class="text-muted">Start Date</small>
-                                    <p class="fw-bold mb-0">Sept 2024</p>
+                                    <p class="fw-bold mb-0">Sept 2026</p>
                                 </div>
                             </div>
                             <div class="d-grid gap-2 mt-4">

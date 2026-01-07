@@ -183,25 +183,25 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Evelyn Harper</td>
+                                    <td>Michael Danies Manurung</td>
                                     <td><span class="badge bg-primary">PRE:4378</span></td>
                                     <td>1185</td>
                                     <td><span class="badge bg-success">98%</span></td>
                                 </tr>
                                 <tr>
-                                    <td>Diana Pierdy</td>
+                                    <td>Ariel Silitonga</td>
                                     <td><span class="badge bg-primary">PRE:4374</span></td>
                                     <td>1165</td>
                                     <td><span class="badge bg-success">91%</span></td>
                                 </tr>
                                 <tr>
-                                    <td>John Millar</td>
+                                    <td>Obet Siahaan</td>
                                     <td><span class="badge bg-primary">PRE:4317</span></td>
                                     <td>1175</td>
                                     <td><span class="badge bg-success">92%</span></td>
                                 </tr>
                                 <tr>
-                                    <td>Miles Esther</td>
+                                    <td>Gracia Sihotang</td>
                                     <td><span class="badge bg-primary">PRE:45371</span></td>
                                     <td>1180</td>
                                     <td><span class="badge bg-success">93%</span></td>

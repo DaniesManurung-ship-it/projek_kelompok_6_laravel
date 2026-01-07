@@ -29,9 +29,9 @@
                         <i class="fas fa-exclamation-triangle fa-2x text-danger"></i>
                     </div>
                     <div>
-                        <h4 class="fw-bold mb-2">PENTING: Jadwal Ujian Semester Genap 2024</h4>
-                        <p class="mb-2">Ujian semester genap akan dilaksanakan tanggal 3-15 Juni 2024. Silakan cek jadwal lengkap di portal akademik.</p>
-                        <small><i class="far fa-clock me-1"></i> Diposting: 25 Mei 2024 | <i class="fas fa-eye me-1 ms-2"></i> 1,245 views</small>
+                        <h4 class="fw-bold mb-2">PENTING: Jadwal Ujian Semester Genap 2026</h4>
+                        <p class="mb-2">Ujian semester genap akan dilaksanakan tanggal 3-15 Juni 2026. Silakan cek jadwal lengkap di portal akademik.</p>
+                        <small><i class="far fa-clock me-1"></i> Diposting: 25 Mei 2026 | <i class="fas fa-eye me-1 ms-2"></i> 1,245 views</small>
                     </div>
                 </div>
             </div>
@@ -42,14 +42,14 @@
     <div class="row">
         @php
             $announcements = [
-                ['title' => 'Penerimaan Siswa Baru TP 2024/2025', 'content' => 'Pendaftaran dibuka mulai 1 Juni - 30 Juni 2024. Syarat dan ketentuan dapat dilihat di website.', 'type' => 'Admission', 'date' => '2024-05-20', 'views' => 892, 'important' => true],
-                ['title' => 'Libur Hari Raya Idul Fitri 1445 H', 'content' => 'Sekolah akan diliburkan tanggal 8-12 April 2024. Kegiatan belajar mengajar akan kembali normal tanggal 15 April 2024.', 'type' => 'Holiday', 'date' => '2024-04-01', 'views' => 754, 'important' => false],
-                ['title' => 'Workshop Digital Literacy untuk Guru', 'content' => 'Workshop akan diadakan pada tanggal 25 Mei 2024 pukul 09.00 - 15.00 WIB di ruang multimedia.', 'type' => 'Workshop', 'date' => '2024-05-15', 'views' => 543, 'important' => false],
-                ['title' => 'Pengumuman Hasil Seleksi OSN 2024', 'content' => 'Hasil seleksi Olimpiade Sains Nasional tingkat sekolah dapat dilihat di papan pengumuman atau website sekolah.', 'type' => 'Competition', 'date' => '2024-05-10', 'views' => 1,203, 'important' => true],
-                ['title' => 'Perubahan Jadwal Ekstrakurikuler', 'content' => 'Ada perubahan jadwal untuk ekstrakurikuler basket dan paduan suara. Silakan cek jadwal terbaru.', 'type' => 'Schedule', 'date' => '2024-05-05', 'views' => 432, 'important' => false],
-                ['title' => 'Sosialisasi Program Beasiswa', 'content' => 'Akan diadakan sosialisasi program beasiswa untuk siswa berprestasi pada tanggal 30 Mei 2024.', 'type' => 'Scholarship', 'date' => '2024-05-03', 'views' => 678, 'important' => false],
-                ['title' => 'Pemeliharaan Sistem IT', 'content' => 'Akan dilakukan pemeliharaan sistem IT pada tanggal 28 Mei 2024 pukul 00.00 - 05.00 WIB. Sistem mungkin tidak dapat diakses.', 'type' => 'Maintenance', 'date' => '2024-05-25', 'views' => 321, 'important' => false],
-                ['title' => 'Kegiatan Bakti Sosial', 'content' => 'Siswa diundang untuk berpartisipasi dalam kegiatan bakti sosial di panti asuhan pada tanggal 1 Juni 2024.', 'type' => 'Event', 'date' => '2024-05-22', 'views' => 456, 'important' => false],
+                ['title' => 'Penerimaan Siswa Baru TP 2025/2026', 'content' => 'Pendaftaran dibuka mulai 1 Juni - 30 Juni 2026. Syarat dan ketentuan dapat dilihat di website.', 'type' => 'Admission', 'date' => '2026-05-20', 'views' => 892, 'important' => true],
+                ['title' => 'Libur Hari Raya Idul Fitri 1445 H', 'content' => 'Sekolah akan diliburkan tanggal 8-12 April 2026. Kegiatan belajar mengajar akan kembali normal tanggal 15 April 2026.', 'type' => 'Holiday', 'date' => '2026-04-01', 'views' => 754, 'important' => false],
+                ['title' => 'Workshop Digital Literacy untuk Guru', 'content' => 'Workshop akan diadakan pada tanggal 25 Mei 2026 pukul 09.00 - 15.00 WIB di ruang multimedia.', 'type' => 'Workshop', 'date' => '2026-05-15', 'views' => 543, 'important' => false],
+                ['title' => 'Pengumuman Hasil Seleksi OSN 2026', 'content' => 'Hasil seleksi Olimpiade Sains Nasional tingkat sekolah dapat dilihat di papan pengumuman atau website sekolah.', 'type' => 'Competition', 'date' => '2026-05-10', 'views' => 1,203, 'important' => true],
+                ['title' => 'Perubahan Jadwal Ekstrakurikuler', 'content' => 'Ada perubahan jadwal untuk ekstrakurikuler basket dan paduan suara. Silakan cek jadwal terbaru.', 'type' => 'Schedule', 'date' => '2026-05-05', 'views' => 432, 'important' => false],
+                ['title' => 'Sosialisasi Program Beasiswa', 'content' => 'Akan diadakan sosialisasi program beasiswa untuk siswa berprestasi pada tanggal 30 Mei 2026.', 'type' => 'Scholarship', 'date' => '2026-05-03', 'views' => 678, 'important' => false],
+                ['title' => 'Pemeliharaan Sistem IT', 'content' => 'Akan dilakukan pemeliharaan sistem IT pada tanggal 28 Mei 2026 pukul 00.00 - 05.00 WIB. Sistem mungkin tidak dapat diakses.', 'type' => 'Maintenance', 'date' => '2026-05-25', 'views' => 321, 'important' => false],
+                ['title' => 'Kegiatan Bakti Sosial', 'content' => 'Siswa diundang untuk berpartisipasi dalam kegiatan bakti sosial di panti asuhan pada tanggal 1 Juni 2026.', 'type' => 'Event', 'date' => '2026-05-22', 'views' => 456, 'important' => false],
             ];
         @endphp
         

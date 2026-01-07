@@ -39,16 +39,16 @@
             <div class="col-md-3 mb-4">
                 <h6 class="fw-bold">Contact Info</h6>
                 <ul class="list-unstyled text-muted">
-                    <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Jl. Pendidikan No. 123, Jakarta</li>
-                    <li class="mb-2"><i class="fas fa-phone me-2"></i>+62 21 1234 5678</li>
-                    <li class="mb-2"><i class="fas fa-envelope me-2"></i>info@schoolpro.edu</li>
+                    <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Marom. Uluan. Sumatera Utara</li>
+                    <li class="mb-2"><i class="fas fa-phone me-2"></i>+62 821 6009 5549</li>
+                    <li class="mb-2"><i class="fas fa-envelope me-2"></i>info@schoolpro.group_6</li>
                     <li class="mb-2"><i class="fas fa-clock me-2"></i>Senin - Jumat: 08:00 - 16:00</li>
                 </ul>
             </div>
         </div>
         
         <div class="text-center py-3 border-top mt-3">
-            <small class="text-muted">© 2024 Teknologi Informasi – Group 6 | Built with Pride and a Smile ❤️😀😁
+            <small class="text-muted">© 2026 Teknologi Informasi – Group 6 | Built with Pride and a Smile ❤️😀😁
             <div><i class="fas fa-heart text-danger"></i> by Professional IT Team</small>
             </div>
         </div>

@@ -124,8 +124,8 @@
                                     <i class="fas fa-user text-primary"></i>
                                 </div>
                                 <div>
-                                    <p class="fw-bold mb-0">Owen Christ</p>
-                                    <small class="text-muted">Mar 17, 2024</small>
+                                    <p class="fw-bold mb-0">Danies Manurung</p>
+                                    <small class="text-muted">Jan 06, 2026</small>
                                 </div>
                             </div>
                         </div>
@@ -145,8 +145,8 @@
                                     <i class="fas fa-user text-primary"></i>
                                 </div>
                                 <div>
-                                    <p class="fw-bold mb-0">Owen Christ</p>
-                                    <small class="text-muted">Jan 22, 2024</small>
+                                    <p class="fw-bold mb-0">Obet Siahaan</p>
+                                    <small class="text-muted">Jan 07, 2026</small>
                                 </div>
                             </div>
                         </div>
@@ -166,8 +166,8 @@
                                     <i class="fas fa-user text-primary"></i>
                                 </div>
                                 <div>
-                                    <p class="fw-bold mb-0">Owen Christ</p>
-                                    <small class="text-muted">Feb 28, 2024</small>
+                                    <p class="fw-bold mb-0">Ariel Silitonga</p>
+                                    <small class="text-muted">Jan 02, 2026</small>
                                 </div>
                             </div>
                         </div>
