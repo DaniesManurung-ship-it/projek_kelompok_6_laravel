@@ -14,11 +14,11 @@
                             <i class="fas fa-graduation-cap fa-3x text-white"></i>
                         </div>
                         <h2 class="fw-bold text-dark mb-2">Create Account</h2>
-                        <p class="text-muted">Join SchoolPro and manage your school efficiently</p>
+                        <p class="text-muted">Join SchoolPro and manage your academic activities</p>
                     </div>
 
                     <!-- Registration Form -->
-                    <form method="POST" action="{{ route('register.post') }}" id="registerForm">
+                    <form method="POST" action="{{ route('register.store') }}" id="registerForm">
                         @csrf
                         
                         <!-- Personal Information Section -->
@@ -30,30 +30,30 @@
                             <!-- Full Name -->
                             <div class="row mb-3">
                                 <div class="col-md-6 mb-3 mb-md-0">
-                                    <label for="first_name" class="form-label">First Name</label>
+                                    <label for="name" class="form-label">Full Name</label>
                                     <div class="input-group">
                                         <span class="input-group-text bg-light border-end-0">
                                             <i class="fas fa-user text-primary"></i>
                                         </span>
-                                        <input type="text" class="form-control border-start-0" id="first_name" 
-                                               name="first_name" value="{{ old('first_name') }}" required
-                                               placeholder="Enter first name">
+                                        <input type="text" class="form-control border-start-0" id="name" 
+                                               name="name" value="{{ old('name') }}" required
+                                               placeholder="Enter your full name">
                                     </div>
-                                    @error('first_name')
+                                    @error('name')
                                         <span class="text-danger small d-block mt-1">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="last_name" class="form-label">Last Name</label>
+                                    <label for="username" class="form-label">Username</label>
                                     <div class="input-group">
                                         <span class="input-group-text bg-light border-end-0">
-                                            <i class="fas fa-user text-primary"></i>
+                                            <i class="fas fa-at text-primary"></i>
                                         </span>
-                                        <input type="text" class="form-control border-start-0" id="last_name" 
-                                               name="last_name" value="{{ old('last_name') }}" required
-                                               placeholder="Enter last name">
+                                        <input type="text" class="form-control border-start-0" id="username" 
+                                               name="username" value="{{ old('username') }}" required
+                                               placeholder="Choose username">
                                     </div>
-                                    @error('last_name')
+                                    @error('username')
                                         <span class="text-danger small d-block mt-1">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -77,7 +77,7 @@
                             
                             <!-- Phone -->
                             <div class="mb-3">
-                                <label for="phone" class="form-label">Phone Number</label>
+                                <label for="phone" class="form-label">Phone Number (Optional)</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0">
                                         <i class="fas fa-phone text-primary"></i>
@@ -144,45 +144,8 @@
                             </div>
                         </div>
 
-                        <!-- Role Selection -->
-                        <div class="mb-4">
-                            <h5 class="fw-bold mb-3 border-bottom pb-2">
-                                <i class="fas fa-user-tag me-2 text-primary"></i>Select Role
-                            </h5>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-check card-option">
-                                        <input class="form-check-input" type="radio" name="role" id="roleAdmin" value="admin" {{ old('role') == 'admin' ? 'checked' : '' }}>
-                                        <label class="form-check-label w-100" for="roleAdmin">
-                                            <div class="card border-2 card-hover h-100">
-                                                <div class="card-body text-center">
-                                                    <i class="fas fa-user-shield fa-2x text-primary mb-3"></i>
-                                                    <h6 class="fw-bold">Administrator</h6>
-                                                    <small class="text-muted">Full access to all features</small>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-check card-option">
-                                        <input class="form-check-input" type="radio" name="role" id="roleTeacher" value="teacher" {{ old('role') == 'teacher' ? 'checked' : 'checked' }}>
-                                        <label class="form-check-label w-100" for="roleTeacher">
-                                            <div class="card border-2 card-hover h-100">
-                                                <div class="card-body text-center">
-                                                    <i class="fas fa-chalkboard-teacher fa-2x text-success mb-3"></i>
-                                                    <h6 class="fw-bold">Teacher</h6>
-                                                    <small class="text-muted">Manage classes and students</small>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            @error('role')
-                                <span class="text-danger small d-block mt-2">{{ $message }}</span>
-                            @enderror
-                        </div>
+                        <!-- Hidden Role Field (Default: student) -->
+                        <input type="hidden" name="role" value="student">
 
                         <!-- Terms & Conditions -->
                         <div class="mb-4">
@@ -201,33 +164,6 @@
                         <button type="submit" class="btn btn-gradient w-100 py-2 fw-bold mb-4" id="registerButton">
                             <i class="fas fa-user-plus me-2"></i>Create Account
                         </button>
-
-                        <!-- Divider -->
-                        <div class="position-relative text-center mb-4">
-                            <hr>
-                            <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
-                                Or register with
-                            </span>
-                        </div>
-
-                        <!-- Social Registration -->
-                        <div class="row g-2 mb-4">
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-outline-primary w-100">
-                                    <i class="fab fa-google me-2"></i>Google
-                                </button>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-outline-info w-100">
-                                    <i class="fab fa-twitter me-2"></i>Twitter
-                                </button>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-outline-dark w-100">
-                                    <i class="fab fa-github me-2"></i>GitHub
-                                </button>
-                            </div>
-                        </div>
 
                         <!-- Login Link -->
                         <div class="text-center">
@@ -414,13 +350,7 @@
         });
         
         // Auto-focus on first field
-        $('#first_name').focus();
-        
-        // Role selection animation
-        $('.card-option .card').click(function() {
-            $('.card-option .card').removeClass('border-primary');
-            $(this).addClass('border-primary');
-        });
+        $('#name').focus();
         
         // Input validation on blur
         $('input[required]').blur(function() {

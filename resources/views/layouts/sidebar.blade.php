@@ -56,8 +56,8 @@
             </li>
 
             <li class="nav-item mb-2">
-                <a class="nav-link text-white {{ request()->routeIs('pengumuman') ? 'active bg-dark text-dark rounded' : '' }}"
-                   href="{{ route('pengumuman') }}">
+                <a class="nav-link text-white {{ request()->routeIs('pengumuman') ? 'active bg-primary text-dark rounded' : '' }}"
+                   href="{{ route('pengumuman.index') }}">
                     <i class="fas fa-bullhorn me-3"></i>Pengumuman
                 </a>
             </li>
@@ -75,7 +75,19 @@
                     <i class="fas fa-newspaper me-3"></i>Berita
                 </a>
             </li>
+
+            <li class="nav-item mb-2">
+    <a class="nav-link text-white {{ request()->routeIs('contact') ? 'active bg-secondary text-dark rounded' : '' }}"
+       href="{{ route('contact') }}">
+        <i class="fas fa-envelope me-3"></i>Contact
+    </a>
+</li>
+
         </ul>
+
+        
+
+        
 
         <!-- ACADEMIC -->
         <ul class="nav flex-column mb-3">

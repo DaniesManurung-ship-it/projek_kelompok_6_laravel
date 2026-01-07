@@ -9,13 +9,88 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EnrollController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\MessageController;
+
+Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
+Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('messages.destroy');
+Route::post('/messages/{id}/read', [MessageController::class, 'markAsRead'])->name('messages.read');
+
+
+Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
+Route::delete('/reports/{report}', [ReportController::class, 'destroy'])->name('reports.destroy');
+Route::get('/reports/{report}/edit', [ReportController::class, 'edit'])->name('reports.edit');
+Route::put('/reports/{report}', [ReportController::class, 'update'])->name('reports.update');
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule.index');
+    Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedule.store');
+    Route::put('/schedule/{schedule}', [ScheduleController::class, 'update'])->name('schedule.update');
+    Route::delete('/schedule/{schedule}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
+});
+
+
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+Route::post('/news', [NewsController::class, 'store'])->name('news.store');
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+Route::get('/news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
+Route::put('/news/{id}', [NewsController::class, 'update'])->name('news.update');
+Route::delete('/news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+
+
+Route::get('/program', [ProgramController::class, 'index'])->name('program.index');
+Route::get('/program_detail', [ProgramController::class, 'index'])->name('program.index');
+Route::post('/program', [ProgramController::class, 'store'])->name('program.store');
+Route::get('/program/{id}', [ProgramController::class, 'show'])->name('program.show');
+Route::put('/program/{id}', [ProgramController::class, 'update'])->name('program.update');
+Route::delete('/program/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
+
+Route::get('/pengumuman', [AnnouncementController::class, 'index'])->name('pengumuman.index');
+Route::post('/pengumuman', [AnnouncementController::class, 'store'])->name('pengumuman.store');
+Route::get('/pengumuman/{id}', [AnnouncementController::class, 'show'])->name('pengumuman.show');
+
+
+
+Route::middleware('auth')->group(function () {
+
+    // CRUD Course (admin)
+    Route::get('/courses', [CourseController::class, 'index']);
+    Route::post('/courses', [CourseController::class, 'store']);
+    Route::delete('/courses/{course}', [CourseController::class, 'destroy']);
+
+    // ENROLL
+    Route::post('/courses/{course}/enroll', [EnrollController::class, 'enroll'])
+         ->name('courses.enroll');
+});
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+});
+
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+    Route::get('/register', [RegisterController::class, 'show'])->middleware('guest')->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.store');
 });
 
 // Protected Routes
@@ -29,7 +104,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/biodata', [HomeController::class, 'biodata'])->name('biodata');
     Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
-    Route::get('/pengumuman', [HomeController::class, 'announcement'])->name('pengumuman');
     Route::get('/program', [HomeController::class, 'program'])->name('program');
     Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
     Route::get('/berita', [HomeController::class, 'news'])->name('berita');

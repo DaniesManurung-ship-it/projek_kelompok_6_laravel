@@ -3,17 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Course;
+use App\Models\News;
+use App\Models\Program;
+use App\Models\Schedule;
+use App\Models\Report;
+use App\Models\Message;
+
+
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+    $courses = Course::all();
+    return view('home', compact('courses'));
     }
 
     public function about()
     {
-        return view('about');
+    $news = News::latest()->take(3)->get();
+    return view('about', compact('news'));
     }
 
     public function biodata()
@@ -33,7 +43,8 @@ class HomeController extends Controller
 
     public function program()
     {
-        return view('program');
+    $programs = Program::orderBy('created_at', 'desc')->get();
+    return view('program', compact('programs'));
     }
 
     public function contact()
@@ -43,7 +54,8 @@ class HomeController extends Controller
 
     public function news()
     {
-        return view('berita');
+        $news = News::latest()->get();
+        return view('news', compact('news'));
     }
 
     public function academic()
@@ -53,12 +65,14 @@ class HomeController extends Controller
 
     public function schedule()
     {
-        return view('schedule');
+        $schedules = Schedule::latest()->get();
+        return view('schedules.schedule', compact('schedules'));
     }
 
     public function messages()
     {
-        return view('messages');
+        $messages = Message::latest()->get();
+        return view('messages', compact('messages'));
     }
 
     public function documents()
@@ -68,6 +82,7 @@ class HomeController extends Controller
 
     public function reports()
     {
-        return view('reports');
+    $reports = Report::orderBy('report_date','desc')->get(); 
+    return view('reports', compact('reports')); 
     }
 }

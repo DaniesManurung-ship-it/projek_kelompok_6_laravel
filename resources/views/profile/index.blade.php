@@ -1,11 +1,18 @@
 @extends('layouts.app')
 
 @section('title', 'Profil Pengguna')
+@if (session('success'))
+    
+@endif
 
 @section('content')
 <div class="container-fluid">
     <!-- Header -->
     <div class="row mb-5">
+        <div class="alert alert-success alert-dismissible fade show">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
         <div class="col">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -283,52 +290,96 @@
 <div class="modal fade" id="editProfileModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold">
-                    <i class="fas fa-edit me-2"></i>Edit Profil
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form id="profileForm">
+
+            <form action="{{ route('profile.update') }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">
+                        <i class="fas fa-edit me-2"></i>Edit Profil
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
                     <div class="row">
+
+                        <!-- Nama -->
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-bold">Nama Lengkap</label>
-                            <input type="text" class="form-control" value="{{ Auth::user()->name }}">
+                            <input type="text"
+                                   name="name"
+                                   class="form-control"
+                                   value="{{ old('name', Auth::user()->name) }}"
+                                   required>
                         </div>
+
+                        <!-- Email -->
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-bold">Email</label>
-                            <input type="email" class="form-control" value="{{ Auth::user()->email }}" disabled>
+                            <input type="email"
+                                   class="form-control"
+                                   value="{{ Auth::user()->email }}"
+                                   disabled>
                             <small class="text-muted">Email tidak dapat diubah</small>
                         </div>
+
+                        <!-- Phone (opsional) -->
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-bold">Telepon</label>
-                            <input type="tel" class="form-control" value="+62 812 3456 7890">
+                            <input type="text"
+                                   name="phone"
+                                   class="form-control"
+                                   value="{{ old('phone', Auth::user()->phone ?? '') }}">
                         </div>
+
+                        <!-- Tanggal Lahir -->
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-bold">Tanggal Lahir</label>
-                            <input type="date" class="form-control" value="1997-02-24">
+                            <input type="date"
+                                   name="birth_date"
+                                   class="form-control"
+                                   value="{{ old('birth_date', Auth::user()->birth_date ?? '') }}">
                         </div>
+
+                        <!-- Alamat -->
                         <div class="col-md-12 mb-3">
                             <label class="form-label fw-bold">Alamat</label>
-                            <textarea class="form-control" rows="3">Jl. Pendidikan No. 123, Jakarta</textarea>
+                            <textarea name="address"
+                                      class="form-control"
+                                      rows="3">{{ old('address', Auth::user()->address ?? '') }}</textarea>
                         </div>
+
+                        <!-- Bio -->
                         <div class="col-md-12 mb-3">
-                            <label class="form-label fw-bold">Bio/Deskripsi Diri</label>
-                            <textarea class="form-control" rows="4" placeholder="Ceritakan tentang diri Anda..."></textarea>
+                            <label class="form-label fw-bold">Bio</label>
+                            <textarea name="bio"
+                                      class="form-control"
+                                      rows="4">{{ old('bio', Auth::user()->bio ?? '') }}</textarea>
                         </div>
+
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-gradient" onclick="saveProfile()">
-                    <i class="fas fa-save me-2"></i>Simpan Perubahan
-                </button>
-            </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Batal
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Simpan Perubahan
+                    </button>
+                </div>
+
+            </form>
+
         </div>
     </div>
 </div>
+
 
 <!-- Change Password Modal -->
 <div class="modal fade" id="changePasswordModal" tabindex="-1">

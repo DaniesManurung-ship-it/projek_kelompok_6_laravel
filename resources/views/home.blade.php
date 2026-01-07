@@ -43,16 +43,7 @@
             <p class="text-muted mb-5 text-center">Let's join our best classes with our famous instructor and institutes.</p>
             
             <div class="row">
-                @php
-                    $courses = [
-                        ['title' => 'Supervised Machine Learning: Regression and Classification', 'instructor' => 'Wide Warrers', 'category' => 'Python Exercises', 'icon' => 'fas fa-robot', 'color' => 'primary'],
-                        ['title' => 'Programming for Everybody (Getting Started with Python)', 'instructor' => 'Brooklyn Siemens', 'category' => 'Playground', 'icon' => 'fas fa-code', 'color' => 'success'],
-                        ['title' => 'Leading Teams: Developing as a Leader', 'instructor' => 'Easy Networks', 'category' => 'Management', 'icon' => 'fas fa-users', 'color' => 'warning'],
-                        ['title' => 'Powerful mental tools to help you master tough subjects', 'instructor' => 'Job Creation', 'category' => 'Psychology', 'icon' => 'fas fa-brain', 'color' => 'info'],
-                        ['title' => 'Python for Financial Analysis Next and Algorithmic Trading', 'instructor' => 'Finance Research', 'category' => 'Finance', 'icon' => 'fas fa-chart-line', 'color' => 'danger'],
-                        ['title' => 'Improve Your English Skills Specialization', 'instructor' => 'Disposal Plans', 'category' => 'Language', 'icon' => 'fas fa-language', 'color' => 'secondary']
-                    ];
-                @endphp
+               
                 
                 @foreach ($courses as $course)
                 <div class="col-md-4 mb-4">
@@ -72,9 +63,13 @@
                                     <small class="text-muted">Instructor:</small>
                                     <p class="fw-bold mb-0">{{ $course['instructor'] }}</p>
                                 </div>
-                                <button class="btn btn-outline-primary btn-sm">
-                                    Enroll Now
-                                </button>
+                                <form action="{{ route('courses.enroll', $course->id) }}" method="POST">
+    @csrf
+    <button class="btn btn-outline-primary btn-sm">
+        Enroll Now
+    </button>
+</form>
+
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,8 @@
 
 @section('title', 'About Us')
 
+@php use Illuminate\Support\Str; @endphp
+
 @section('content')
 <div class="container-fluid">
     <!-- Welcome Section -->
@@ -13,7 +15,7 @@
                         <h1 class="fw-bold display-6 mb-3">Welcome to <span class="text-primary">SchoolPro</span></h1>
                         <p class="lead mb-4">Discover the world of possibility with UniCamp!</p>
                         <div class="d-flex align-items-center gap-3">
-                            <span class="badge bg-primary fs-6 p-3">FALL 2024 APPLICATIONS ARE NOW OPEN</span>
+                            <span class="badge bg-primary fs-6 p-3">FALL 2026 APPLICATIONS ARE NOW OPEN</span>
                             <a href="#" class="btn btn-gradient btn-lg">Admissions</a>
                         </div>
                     </div>
@@ -117,15 +119,35 @@
                                 <span class="badge bg-primary">ALUMNI</span>
                                 <span class="badge bg-success">RESEARCH</span>
                             </div>
-                            <h5 class="fw-bold mb-3">Autism rates have increased and show differences in ethnic minorities</h5>
+                            @foreach ($news as $item)
+<div class="col-md-4 mb-4">
+    <div class="card border-0 shadow-sm h-100">
+        <div class="card-body p-4">
+            <span class="badge bg-primary mb-2">{{ $item->category }}</span>
+
+            <h5 class="fw-bold mb-3">{{ $item->title }}</h5>
+
+            <p class="text-muted">
+                {{ Str::limit($item->content, 100) }}
+            </p>
+
+            <div class="mt-3">
+                <small class="text-muted">
+                    {{ $item->created_at?->format('d M Y') ?? 'Date not available' }}
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
                             <p class="text-muted">Recent research shows significant findings in autism spectrum disorders across different populations.</p>
                             <div class="d-flex align-items-center mt-4">
                                 <div class="bg-light rounded-circle p-2 me-3">
                                     <i class="fas fa-user text-primary"></i>
                                 </div>
                                 <div>
-                                    <p class="fw-bold mb-0">Owen Christ</p>
-                                    <small class="text-muted">Mar 17, 2024</small>
+                                    <p class="fw-bold mb-0">Danies Manurung</p>
+                                    <small class="text-muted">Jan 07, 2026</small>
                                 </div>
                             </div>
                         </div>
@@ -145,8 +167,8 @@
                                     <i class="fas fa-user text-primary"></i>
                                 </div>
                                 <div>
-                                    <p class="fw-bold mb-0">Owen Christ</p>
-                                    <small class="text-muted">Jan 22, 2024</small>
+                                    <p class="fw-bold mb-0">Ariel Silitonga</p>
+                                    <small class="text-muted">Jan 22, 2026</small>
                                 </div>
                             </div>
                         </div>
@@ -166,8 +188,8 @@
                                     <i class="fas fa-user text-primary"></i>
                                 </div>
                                 <div>
-                                    <p class="fw-bold mb-0">Owen Christ</p>
-                                    <small class="text-muted">Feb 28, 2024</small>
+                                    <p class="fw-bold mb-0">Obet Siahaan</p>
+                                    <small class="text-muted">Feb 28, 2026</small>
                                 </div>
                             </div>
                         </div>

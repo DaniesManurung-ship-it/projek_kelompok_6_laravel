@@ -61,9 +61,9 @@
     <div class="row mb-5">
         @php
             $contactInfo = [
-                ['icon' => 'fas fa-map-marker-alt', 'title' => 'Visit Us', 'info' => 'Jl. Pendidikan No. 123, Jakarta 12345', 'button' => 'Get Directions', 'color' => 'primary'],
-                ['icon' => 'fas fa-phone', 'title' => 'Call Us', 'info' => '+62 21 1234 5678<br>+62 812 3456 7890', 'button' => 'Call Now', 'color' => 'success'],
-                ['icon' => 'fas fa-envelope', 'title' => 'Email Us', 'info' => 'info@schoolpro.edu<br>admissions@schoolpro.edu', 'button' => 'Send Email', 'color' => 'warning'],
+                ['icon' => 'fas fa-map-marker-alt', 'title' => 'Visit Us', 'info' => 'Marom. Uluan. Sumatera Utara', 'button' => 'Get Directions', 'color' => 'primary'],
+                ['icon' => 'fas fa-phone', 'title' => 'Call Us', 'info' => '+62 21 6009 5549<br>+62 821 1809 8584', 'button' => 'Call Now', 'color' => 'success'],
+                ['icon' => 'fas fa-envelope', 'title' => 'Email Us', 'info' => 'info@schoolpro.kelompok-6<br>admissions@schoolpro.kelompok-6', 'button' => 'Send Email', 'color' => 'warning'],
                 ['icon' => 'fas fa-clock', 'title' => 'Office Hours', 'info' => 'Monday - Friday: 8:00 AM - 4:00 PM<br>Saturday: 9:00 AM - 12:00 PM', 'button' => 'Schedule Visit', 'color' => 'danger'],
             ];
         @endphp
@@ -169,10 +169,10 @@
                     <div class="list-group list-group-flush">
                         @php
                             $deps = [
-                                ['name' => 'Admissions Office', 'email' => 'admissions@schoolpro.edu'],
-                                ['name' => 'Academic Office', 'email' => 'academic@schoolpro.edu'],
-                                ['name' => 'Student Affairs', 'email' => 'student@schoolpro.edu'],
-                                ['name' => 'Finance Department', 'email' => 'finance@schoolpro.edu'],
+                                ['name' => 'Admissions Office', 'email' => 'admissions@schoolpro.kelompo-6'],
+                                ['name' => 'Academic Office', 'email' => 'academic@schoolpro.kelompok-6'],
+                                ['name' => 'Student Affairs', 'email' => 'student@schoolpro.kelompok-6'],
+                                ['name' => 'Finance Department', 'email' => 'finance@schoolpro.kelompok-6'],
                             ];
                         @endphp
                         @foreach($deps as $dep)

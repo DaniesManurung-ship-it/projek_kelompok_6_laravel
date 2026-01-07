@@ -3,6 +3,13 @@
 @section('title', 'Program Sekolah')
 
 @section('content')
+@if (session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div class="container-fluid">
     <!-- Header -->
     <div class="row mb-5">
@@ -58,56 +65,45 @@
         </div>
     </div>
 
+
     <!-- Featured Programs -->
-    <div class="row mb-5">
-        <div class="col">
-            <h2 class="fw-bold mb-4">Featured Programs</h2>
-            <div class="row">
-                @php
-                    $featuredPrograms = [
-                        ['title' => 'International Baccalaureate (IB)', 'desc' => 'Globally recognized program for students aged 16-19', 'duration' => '2 Years', 'level' => 'Advanced', 'seats' => 'Limited'],
-                        ['title' => 'Advanced Placement (AP)', 'desc' => 'College-level courses and exams for high school students', 'duration' => '1 Year', 'level' => 'College', 'seats' => 'Available'],
-                        ['title' => 'STEAM Program', 'desc' => 'Integrating Arts into STEM education', 'duration' => '3 Years', 'level' => 'Intermediate', 'seats' => 'Open'],
-                        ['title' => 'Dual Language Immersion', 'desc' => 'Bilingual education program', 'duration' => '4 Years', 'level' => 'Beginner', 'seats' => 'Limited'],
-                    ];
-                @endphp
-                
-                @foreach ($featuredPrograms as $program)
-                <div class="col-md-6 mb-4">
-                    <div class="card border-0 shadow-sm card-hover h-100">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <h5 class="fw-bold">{{ $program['title'] }}</h5>
-                                <span class="badge bg-{{ $program['seats'] == 'Limited' ? 'danger' : 'success' }}">
-                                    {{ $program['seats'] }} Seats
-                                </span>
+<div class="row mb-5">
+    <div class="col">
+        <h2 class="fw-bold mb-4">Featured Programs</h2>
+        <div class="row">
+            @foreach ($programs as $program)
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-sm card-hover h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="fw-bold">{{ $program->title }}</h5>
+                            <span class="badge bg-{{ $program->seats == 'Limited' ? 'danger' : 'success' }}">
+                                {{ $program->seats }} Seats
+                            </span>
+                        </div>
+                        <p class="text-muted mb-4">{{ $program->desc }}</p>
+                        <div class="row">
+                            <div class="col">
+                                <small class="text-muted">Duration</small>
+                                <p class="fw-bold mb-0">{{ $program->duration }}</p>
                             </div>
-                            <p class="text-muted mb-4">{{ $program['desc'] }}</p>
-                            <div class="row">
-                                <div class="col">
-                                    <small class="text-muted">Duration</small>
-                                    <p class="fw-bold mb-0">{{ $program['duration'] }}</p>
-                                </div>
-                                <div class="col">
-                                    <small class="text-muted">Level</small>
-                                    <p class="fw-bold mb-0">{{ $program['level'] }}</p>
-                                </div>
-                                <div class="col">
-                                    <small class="text-muted">Start Date</small>
-                                    <p class="fw-bold mb-0">Sept 2024</p>
-                                </div>
+                            <div class="col">
+                                <small class="text-muted">Level</small>
+                                <p class="fw-bold mb-0">{{ $program->level }}</p>
                             </div>
-                            <div class="d-grid gap-2 mt-4">
-                                <button class="btn btn-outline-primary">Program Details</button>
-                                <button class="btn btn-gradient">Apply Now</button>
-                            </div>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <a href="{{ route('program.show', $program->id) }}" class="btn btn-outline-primary">Program Details</a>
+                            
                         </div>
                     </div>
                 </div>
-                @endforeach
             </div>
+            @endforeach
         </div>
     </div>
+</div>
+
 
     <!-- Curriculum Structure -->
     <div class="row" id="enroll">
@@ -169,60 +165,41 @@
     </div>
 
     <!-- Enrollment Form -->
-    <div class="row mt-5">
-        <div class="col">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body p-5">
-                    <h3 class="fw-bold text-center mb-4">Enrollment Form</h3>
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Student Name</label>
-                                <input type="text" class="form-control" placeholder="Enter student name">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Grade Level</label>
-                                <select class="form-select">
-                                    <option selected>Select Grade</option>
-                                    <option>Grade 1-6 (Elementary)</option>
-                                    <option>Grade 7-9 (Middle School)</option>
-                                    <option>Grade 10-12 (High School)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Parent/Guardian Name</label>
-                                <input type="text" class="form-control" placeholder="Enter parent/guardian name">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Contact Number</label>
-                                <input type="tel" class="form-control" placeholder="Enter contact number">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Email Address</label>
-                            <input type="email" class="form-control" placeholder="Enter email address">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Program of Interest</label>
-                            <select class="form-select">
-                                <option selected>Select Program</option>
-                                <option>International Baccalaureate (IB)</option>
-                                <option>Advanced Placement (AP)</option>
-                                <option>STEAM Program</option>
-                                <option>Dual Language Immersion</option>
-                            </select>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-gradient btn-lg px-5">
-                                <i class="fas fa-paper-plane me-2"></i>Submit Application
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <form action="{{ route('program.store') }}" method="POST">
+    @csrf
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">Program Title</label>
+            <input type="text" name="title" class="form-control" placeholder="Program Title" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label fw-bold">Duration</label>
+            <input type="text" name="duration" class="form-control" placeholder="Duration" required>
         </div>
     </div>
-</div>
+    <div class="mb-3">
+        <label class="form-label fw-bold">Description</label>
+        <textarea name="desc" class="form-control" placeholder="Program Description" required></textarea>
+    </div>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label class="form-label fw-bold">Level</label>
+            <input type="text" name="level" class="form-control" placeholder="Level" required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label fw-bold">Seats</label>
+            <input type="text" name="seats" class="form-control" placeholder="Seats" required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label fw-bold">Category</label>
+            <input type="text" name="category" class="form-control" placeholder="Category" required>
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-gradient btn-lg px-5">
+            <i class="fas fa-plus me-2"></i>Add Program
+        </button>
+    </div>
+</form>
+
 @endsection
