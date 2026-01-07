@@ -11,6 +11,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\MessageController;
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
@@ -96,4 +97,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/exam', function () {
     return view('exam'); // Ini akan mencari file exam.blade.php
     })->name('exam.index');
+
+    // Messages
+    Route::resource('messages', MessageController::class);
 });

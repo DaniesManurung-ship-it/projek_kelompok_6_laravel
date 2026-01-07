@@ -145,7 +145,7 @@
                 <ul class="nav flex-column ms-4">
                     <li class="nav-item mb-1">
                         <a class="nav-link text-white {{ request()->routeIs('messages') ? 'active bg-primary text-dark rounded' : '' }}"
-                           href="{{ route('messages') }}">
+                           href="{{ route('messages.index') }}">
                             <i class="fas fa-envelope me-2"></i>Messages
                         </a>
                     </li>
